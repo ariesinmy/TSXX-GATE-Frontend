@@ -1,0 +1,21 @@
+name: testBuild
+on:
+  push:
+    branches: [main]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@main
+
+    - name: Install and Build
+      run: |
+        yarn install
+        yarn build
+
+    - name: Deploy on github page
+      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      with:
+        BRANCH: gh-pages
+        FOLDER: dist
