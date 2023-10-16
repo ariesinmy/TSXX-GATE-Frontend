@@ -14,12 +14,12 @@ const icon = (name) => {
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: 'Dashboard',
     path: '/dashboard',
     icon: icon('ic_analytics'),
   },
   {
-    title: 'staff',
+    title: 'Employee',
     path: '/staff',
     icon: icon('ic_user'),
   },
