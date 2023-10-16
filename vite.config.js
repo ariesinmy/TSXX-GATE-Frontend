@@ -14,7 +14,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/TSXX-GATE-Frontend/', // 如果不是用 Github 部署的话要 commet 起来
+  base: '/TSXX-GATE-Frontend/',
   resolve: {
     alias: [
       {

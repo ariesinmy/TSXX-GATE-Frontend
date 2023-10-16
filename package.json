@@ -19,7 +19,7 @@
     "dev:host": "vite --host",
     "vite:start": "vite",
     "vite:build": "vite build",
-    "predeploy": "vite build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
