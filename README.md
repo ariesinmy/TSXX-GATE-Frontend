@@ -1,4 +1,4 @@
-## TSXX-GATE (聽說repo名稱不能是 TSMC)
+## TSXX-GATE
 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
