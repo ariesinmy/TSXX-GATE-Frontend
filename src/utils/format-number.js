@@ -30,6 +30,10 @@ export function fData(number) {
   return result(format, '.0');
 }
 
+export function fMachineStatus(flag) {
+  return flag ? "Needs Repair" : "Good";
+}
+
 function result(format, key = '.00') {
   const isInteger = format.includes(key);
 
