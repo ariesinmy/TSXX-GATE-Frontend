@@ -12,7 +12,7 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const logo = (
     <Box component="span" sx={{ width: "auto", height: 40, cursor: 'pointer', ...sx, fontSize: "1.5rem"}}>
       <strong style={{color: "black"}}>
-        TSMC
+        TSXX
         <span style={{color: "#FF3333"}}>GATE</span>
       </strong>
     </Box>

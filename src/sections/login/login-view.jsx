@@ -101,7 +101,7 @@ export default function LoginView() {
         >
           <Typography variant="h4">Sign in to&nbsp;
             <strong>
-              TSMC
+              TSXX
               <span style={{color: "#FF3333"}}>GATE</span>
             </strong>
           </Typography>

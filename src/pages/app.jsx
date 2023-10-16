@@ -8,7 +8,7 @@ export default function AppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | TSMC-Gate </title>
+        <title> Dashboard | TSXX-Gate </title>
       </Helmet>
 
       <AppView />

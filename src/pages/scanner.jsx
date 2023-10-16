@@ -8,7 +8,7 @@ export default function ScannerPage() {
   return (
     <>
       <Helmet>
-        <title> Scanner | TSMC-Gate </title>
+        <title> Scanner | TSXX-Gate </title>
       </Helmet>
 
       <ScannerView />

@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 
 export const account = {
-  displayName: 'TSMC Boss',
-  email: 'tsmcBoss@gmail.com',
+  displayName: 'TSXX Boss',
+  email: 'tsxxBoss@gmail.com',
   photoURL: '/assets/images/avatars/avatar_25.jpg',
 };

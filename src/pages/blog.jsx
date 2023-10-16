@@ -8,7 +8,7 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Blog | TSMC-Gate </title>
+        <title> Blog | TSXX-Gate </title>
       </Helmet>
 
       <BlogView />

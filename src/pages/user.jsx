@@ -8,7 +8,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> Staff | TSMC-Gate </title>
+        <title> Staff | TSXX-Gate </title>
       </Helmet>
 
       <UserView />

@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | TSMC-Gate </title>
+        <title> Login | TSXX-Gate </title>
       </Helmet>
 
       <LoginView />
