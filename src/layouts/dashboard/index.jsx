@@ -9,12 +9,16 @@ import Header from './header';
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ children, themeMode, setThemeMode }) {
   const [openNav, setOpenNav] = useState(false);
 
   return (
     <>
-      <Header onOpenNav={() => setOpenNav(true)} />
+      <Header
+        onOpenNav={() => setOpenNav(true)}
+        themeMode={themeMode}
+        setThemeMode={setThemeMode}
+      />
 
       <Box
         sx={{
@@ -33,4 +37,6 @@ export default function DashboardLayout({ children }) {
 
 DashboardLayout.propTypes = {
   children: PropTypes.node,
+  themeMode: PropTypes.string,
+  setThemeMode: PropTypes.func,
 };

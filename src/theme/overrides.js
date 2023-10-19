@@ -50,7 +50,7 @@ export function overrides(theme) {
     MuiBackdrop: {
       styleOverrides: {
         root: {
-          backgroundColor: alpha(theme.palette.grey[800], 0.8),
+          backgroundColor: alpha(theme.palette.grey[900], 0.9),
         },
         invisible: {
           background: 'transparent',
@@ -61,7 +61,7 @@ export function overrides(theme) {
       styleOverrides: {
         containedInherit: {
           color: theme.palette.common.white,
-          backgroundColor: theme.palette.grey[800],
+          backgroundColor: theme.palette.grey[600],
           '&:hover': {
             color: theme.palette.common.white,
             backgroundColor: theme.palette.grey[800],

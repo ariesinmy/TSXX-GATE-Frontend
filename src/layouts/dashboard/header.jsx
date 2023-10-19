@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -23,10 +25,9 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import React from 'react';
-
 // ----------------------------------------------------------------------
 
-export default function Header({ onOpenNav }) {
+export default function Header({ onOpenNav, themeMode, setThemeMode }) {
   const theme = useTheme();
 
   const lgUp = useResponsive('up', 'lg');
@@ -44,8 +45,28 @@ export default function Header({ onOpenNav }) {
       <Box sx={{ flexGrow: 1 }} />
 
       <Stack direction="row" alignItems="center" spacing={1}>
-        <IconButton sx={{ ml: 1 }} onClick={() => console.log("click switch")} color="inherit">
-          {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        <IconButton sx={{
+          width: 30,
+          height: 30,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"}}
+        >
+          {themeMode === 'dark'
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+            ? 
+              <Brightness7Icon
+                style={{ color: "grey" }}
+                onClick={() => setThemeMode("light")}
+                sx={{width: 20, height: 20}}
+              />
+            :
+              <Brightness4Icon
+                style={{ color: "grey" }}
+                onClick={() => setThemeMode("dark")}
+                sx={{width: 20, height: 20}}
+              />
+          }
         </IconButton>
         <LanguagePopover />
         <NotificationsPopover />
@@ -85,5 +106,7 @@ export default function Header({ onOpenNav }) {
 }
 
 Header.propTypes = {
+  themeMode: PropTypes.string,
   onOpenNav: PropTypes.func,
+  setThemeMode: PropTypes.func,
 };

@@ -12,18 +12,11 @@ import ThemeProvider from 'src/theme';
 export default function App() {
   useScrollToTop();
   const [themeMode, setThemeMode] = useState("light");
-  // const colorMode = useMemo(
-  //   () => ({
-  //     toggleColorMode: () => {
-  //       themeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-  //     },
-  //   }),
-  //   [themeMode],
-  // );
+  console.log(themeMode)
 
   return (
       <ThemeProvider themeMode={themeMode}>
-        <Router setThemeMode={setThemeMode} />
+        <Router themeMode={themeMode} setThemeMode={setThemeMode} />
       </ThemeProvider>
   );
 }

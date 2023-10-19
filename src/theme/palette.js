@@ -103,7 +103,7 @@ const base = {
 // mode: light or dark
 export function palette(mode) {
   console.log(mode);
-  return {
+  const lightMode = {
     ...base,
     mode: 'light',
     text: {
@@ -120,5 +120,26 @@ export function palette(mode) {
       ...base.action,
       active: grey[600],
     },
-  };
+  }
+
+  const darkMode = {
+    ...base,
+    mode: 'dark',
+    text: {
+      primary: grey[200],
+      secondary: grey[300],
+      disabled: grey[500],
+    },
+    background: {
+      paper: grey[800],
+      default: grey[900],
+      neutral: grey[700],
+    },
+    action: {
+      ...base.action,
+      active: grey[400],
+    },
+  }
+
+  return mode === "light" ? lightMode : darkMode;
 }

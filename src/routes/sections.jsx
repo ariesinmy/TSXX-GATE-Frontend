@@ -13,7 +13,7 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
 // ----------------------------------------------------------------------
 
-export default function Router() {
+export default function Router({themeMode, setThemeMode}) {
   const routes = useRoutes([
     {
       path: '/',
@@ -21,7 +21,7 @@ export default function Router() {
     },
     {
       element: (
-        <DashboardLayout>
+        <DashboardLayout themeMode={themeMode} setThemeMode={setThemeMode}>
           <Suspense>
             <Outlet />
           </Suspense>

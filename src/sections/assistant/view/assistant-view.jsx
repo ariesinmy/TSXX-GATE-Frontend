@@ -46,7 +46,7 @@ export default function AssistantView() {
         const gptMessage = { text: gptResponse, user: false };
         setChatHistory([...chatHistory, gptMessage]);
       }
-    } 
+    }
     fetchGPT();
   }, [chatHistory])
 
@@ -103,14 +103,23 @@ export default function AssistantView() {
               </Box>
             ))
           ) : (
-            <div>
-              <Typography variant="h2" color="#919EAB">
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              minHeight="70vh" // 調整高度以適應您的需求
+            >
+              <Typography variant="h2" color="#DFE3E8">
                 TSXX-GATE
               </Typography>
-              <Typography variant="h3" color="#919EAB">
+              <Typography variant="h3" color="#C4CDD5">
                 Assistant
               </Typography>
-            </div>
+              <Typography variant="h4" color="#C4CDD5">
+                Start Conversation!
+              </Typography>
+            </Box>
           )}
         </Box>
 

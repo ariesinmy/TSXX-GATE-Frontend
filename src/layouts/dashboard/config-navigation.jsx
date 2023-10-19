@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import SummarizeRoundedIcon from '@mui/icons-material/SummarizeRounded';
 
 import SvgColor from 'src/components/svg-color';
 
@@ -7,8 +8,11 @@ import SvgColor from 'src/components/svg-color';
 
 const icon = (name) => {
   if (name === "assistant") {
-    return <QuestionAnswerTwoToneIcon />
-  } 
+    return <QuestionAnswerRoundedIcon />
+  }
+  if (name === "report") {
+    return <SummarizeRoundedIcon />
+  }
   return <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
 };
 
@@ -32,6 +36,11 @@ const navConfig = [
     title: 'Assistant',
     path: '/assistant',
     icon: icon('assistant'),
+  },
+  {
+    title: 'Report',
+    path: '/report',
+    icon: icon('report'),
   },
   // {
   //   title: 'Not found',
