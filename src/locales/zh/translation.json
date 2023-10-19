@@ -1,0 +1,34 @@
+{  
+    "app": {
+        "Absent": "缺席",
+        "Attendance": "出勤",
+        "AttendanceCount": "出勤人數",
+        "AttendanceOverview": "出勤概覽",
+        "EmployeeCount": "員工數量",
+        "EmployeeDistribution": "員工分布",
+        "ErrorLogs": "錯誤日志",
+        "LateArrivals": "遲到人數",
+        "MachineStatus": "設備狀態",
+        "Overdue": "遲到",
+        "Tasks": "任務",
+        "Welcome": "嗨，歡迎回來"
+    },
+    "machine": {
+        "Good": "正常",
+        "NeedsRepair": "需要維修"
+    },
+    "country": {
+        "Taiwan": "台灣",
+        "USA": "美國",
+        "Japan": "日本"
+    },
+    "login": {
+        "ForgotPassword": "忘記密碼",
+        "Login": "登入",
+        "Account": "賬號",
+        "Password": "密碼",
+        "DontHaveAnAccount": "還沒有賬號",
+        "ContactMe": "聯絡我",
+        "SigninTo": "歡迎進入"
+    }
+}

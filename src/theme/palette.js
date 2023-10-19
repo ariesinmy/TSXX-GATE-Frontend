@@ -100,8 +100,9 @@ const base = {
 };
 
 // ----------------------------------------------------------------------
-
-export function palette() {
+// mode: light or dark
+export function palette(mode) {
+  console.log(mode);
   return {
     ...base,
     mode: 'light',

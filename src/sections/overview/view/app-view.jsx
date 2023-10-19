@@ -16,19 +16,24 @@ import AppWidgetSummary from '../app-widget-summary';
 // import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from "react-i18next";
+
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+  const { t, i18n } = useTranslation();
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 👋
+        {t("app.Welcome")} 👋
       </Typography>
 
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Attendance"
+            title={t("app.AttendanceCount")}
             total={159}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/fingerprint.png" />}
@@ -37,7 +42,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Late Arrivals"
+            title={t("app.LateArrivals")}
             total={12}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/overdue.png" />}
@@ -46,7 +51,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Machine Status"
+            title={t("app.MachineStatus")}
             total={-1}
             status
             color="warning"
@@ -56,7 +61,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Error Logs"
+            title={t("app.ErrorLogs")}
             total={5}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/alert.png" />}
@@ -65,7 +70,7 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
-            title="Attendance Overview"
+            title={t("app.AttendanceOverview")}
             subheader="Today's attendance rate is 91%"
             chart={{
               labels: [
@@ -83,19 +88,19 @@ export default function AppView() {
               ],
               series: [
                 {
-                  name: 'Attendance',
+                  name: t("app.Attendance"),
                   type: 'line',
                   fill: 'solid',
                   data: [35, 32, 36, 47, 45, 52, 64, 52, 59, 49, 39],
                 },
                 {
-                  name: 'Overdue',
+                  name: t("app.Overdue"),
                   type: 'line',
                   fill: 'solid',
                   data: [30, 21, 14, 29, 22, 43, 21, 41, 15, 27, 43],
                 },
                 {
-                  name: 'Absent',
+                  name: t("app.Absent"),
                   type: 'column',
                   fill: 'solid',
                   data: [7, 6, 15, 10, 13, 9, 3, 2, 0, 3, 4],
@@ -107,7 +112,7 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentVisits
-            title="Employee Distribution"
+            title={t("app.EmployeeDistribution")}
             chart={{
               series: [
                 { label: 'AT', value: 4344 },
@@ -120,12 +125,12 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
-            title="Employee Count"
+            title={t("app.EmployeeCount")}
             chart={{
               series: [
-                { label: 'Taiwan', value: 24500 },
-                { label: 'Japan', value: 10000 },
-                { label: 'USA', value: 19000 },
+                { label: t("country.Taiwan"), value: 24500 },
+                { label: t("country.USA"), value: 10000 },
+                { label: t("country.Japan"), value: 19000 },
               ],
             }}
           />
@@ -206,7 +211,7 @@ export default function AppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppTasks
-            title="Tasks"
+            title={t("app.Tasks")}
             list={[
               { id: '1', name: 'Attendance Checking' },
               { id: '2', name: 'Daily Report Generation' },

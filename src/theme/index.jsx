@@ -11,17 +11,18 @@ import { typography } from './typography';
 import { customShadows } from './custom-shadows';
 
 // ----------------------------------------------------------------------
+// themeMode: light or dark
+export default function ThemeProvider({ children, themeMode }) {
 
-export default function ThemeProvider({ children }) {
   const memoizedValue = useMemo(
     () => ({
-      palette: palette(),
+      palette: palette(themeMode),
       typography,
       shadows: shadows(),
       customShadows: customShadows(),
       shape: { borderRadius: 8 },
     }),
-    []
+    [themeMode]
   );
 
   const theme = createTheme(memoizedValue);
@@ -38,4 +39,5 @@ export default function ThemeProvider({ children }) {
 
 ThemeProvider.propTypes = {
   children: PropTypes.node,
+  themeMode: PropTypes.string,
 };

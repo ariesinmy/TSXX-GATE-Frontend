@@ -14,7 +14,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/TSXX-GATE-Frontend/',
+  // base: '/TSXX-GATE-Frontend/',
   resolve: {
     alias: [
       {

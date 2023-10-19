@@ -5,11 +5,19 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { fShortenNumber, fMachineStatus } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number';
+
+import { useTranslation, Trans } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function AppWidgetSummary({ title, total, status, icon, color = 'primary', sx, ...other }) {
+  const { t, i18n } = useTranslation();
+  
+  function fMachineStatus(isGood) {
+    return isGood ? t('machine.Good') : t('machine.NeedsRepair');
+  }
+
   return (
     <Card
       component={Stack}
@@ -29,7 +37,10 @@ export default function AppWidgetSummary({ title, total, status, icon, color = '
         {
           total && total >= 0
           ? (<Typography variant="h4">{fShortenNumber(total)}</Typography>)
-          : (<Typography variant="h4">{fMachineStatus(status)}</Typography>)
+          : (<Typography variant="h4">{
+            // t(`format.${fMachineStatus(true)}`)
+            t("status", fMachineStatus(true))
+          }</Typography>)
         }
         <Typography
           variant="h5"

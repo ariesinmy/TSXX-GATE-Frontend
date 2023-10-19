@@ -19,6 +19,11 @@ import AccountPopover from './common/account-popover';
 import LanguagePopover from './common/language-popover';
 import NotificationsPopover from './common/notifications-popover';
 
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+import React from 'react';
+
 // ----------------------------------------------------------------------
 
 export default function Header({ onOpenNav }) {
@@ -39,6 +44,9 @@ export default function Header({ onOpenNav }) {
       <Box sx={{ flexGrow: 1 }} />
 
       <Stack direction="row" alignItems="center" spacing={1}>
+        <IconButton sx={{ ml: 1 }} onClick={() => console.log("click switch")} color="inherit">
+          {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
         <LanguagePopover />
         <NotificationsPopover />
         <AccountPopover />

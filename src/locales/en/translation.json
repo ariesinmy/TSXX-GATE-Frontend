@@ -1,0 +1,34 @@
+{
+    "app": {
+      "Absent": "Absent",
+      "Attendance": "Attendance",
+      "AttendanceCount": "Attendance",
+      "AttendanceOverview": "Attendance Overview",
+      "EmployeeCount": "Employee Count",
+      "EmployeeDistribution": "Employee Distribution",
+      "ErrorLogs": "Error Logs",
+      "LateArrivals": "Late Arrivals",
+      "MachineStatus": "Machine Status",
+      "Overdue": "Overdue",
+      "Tasks": "Tasks",
+      "Welcome": "Hi, Welcome back"
+    },
+    "machine": {
+        "Good": "Good",
+        "NeedsRepair": "NeedsRepair"
+    },
+    "country": {
+        "Taiwan": "Taiwan",
+        "USA": "USA",
+        "Japan": "Japan"
+    },
+    "login": {
+        "ForgotPassword": "ForgotPassword",
+        "Login": "Login",
+        "Account": "Account",
+        "Password": "Password",
+        "DontHaveAnAccount": "Don’t have an account",
+        "ContactMe": "Contact Me",
+        "SigninTo": "Sign in to"
+    }
+}
