@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -6,27 +6,19 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import RefreshIcon from '@mui/icons-material/Refresh';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import OpenAI from 'openai';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import axios from 'axios';
-
-// const configuration = new Configuration({
-//     organization: "org-x0nf297Pf5sppTS0XRHfafKP",
-//     apiKey: "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",
-// });
-// const openai = new OpenAIApi(configuration);
-const API_KEY = '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';
-const openai = new OpenAI({
-  apiKey: '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', // 將 YOUR_API_KEY_HERE 替換為您的實際 API 金鑰
-  dangerouslyAllowBrowser: true,
-});
 
 // ----------------------------------------------------------------------
-
 export default function AssistantView() {
+  const openai = useMemo(() => new OpenAI({
+      apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+      dangerouslyAllowBrowser: true,
+    }), []);
+
+
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([]); // [{text: string, user: boolean}]
+  
 
   const handleUserInput = (e) => {
     setUserInput(e.target.value);
@@ -34,7 +26,7 @@ export default function AssistantView() {
 
   useEffect(() => {
     async function fetchGPT() {
-      if (chatHistory && chatHistory.length > 0 && (chatHistory.length % 2 !== 0)) {
+      if (openai && chatHistory && chatHistory.length > 0 && (chatHistory.length % 2 !== 0)) {
         const userContent = chatHistory[chatHistory.length - 1].text;
         const completions = await openai.chat.completions.create({
           model: 'gpt-3.5-turbo',
@@ -48,7 +40,7 @@ export default function AssistantView() {
       }
     }
     fetchGPT();
-  }, [chatHistory])
+  }, [chatHistory, openai])
 
   const handleUserSubmit = async () => {
     if (userInput) {
@@ -79,7 +71,7 @@ export default function AssistantView() {
           flexDirection="column"
           justifyContent="flex-end" // 此行使對話區固定在底部
           minHeight="70vh" // 或其他您選擇的適當高度
-          overflowY="auto" // 如果對話區內容多於可視區域，添加垂直滾動條
+          overflowy="auto" // 如果對話區內容多於可視區域，添加垂直滾動條
         >
           {chatHistory.length > 0 ? (
             chatHistory.map((message, index) => (

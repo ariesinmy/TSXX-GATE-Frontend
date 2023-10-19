@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -45,25 +43,26 @@ export default function Header({ onOpenNav, themeMode, setThemeMode }) {
       <Box sx={{ flexGrow: 1 }} />
 
       <Stack direction="row" alignItems="center" spacing={1}>
-        <IconButton sx={{
-          width: 30,
-          height: 30,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"}}
+        <IconButton
+          sx={{
+            width: 30,
+            height: 30,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+          
+          onClick={() => setThemeMode(themeMode === "light" ? "dark" : "light")}
         >
           {themeMode === 'dark'
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             ? 
               <Brightness7Icon
                 style={{ color: "grey" }}
-                onClick={() => setThemeMode("light")}
                 sx={{width: 20, height: 20}}
               />
             :
               <Brightness4Icon
                 style={{ color: "grey" }}
-                onClick={() => setThemeMode("dark")}
                 sx={{width: 20, height: 20}}
               />
           }
