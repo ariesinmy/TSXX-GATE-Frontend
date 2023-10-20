@@ -70,8 +70,9 @@ export default function AssistantView() {
           display="flex"
           flexDirection="column"
           justifyContent="flex-end" // 此行使對話區固定在底部
-          minHeight="70vh" // 或其他您選擇的適當高度
+          minHeight="60vh" // 或其他您選擇的適當高度
           overflowy="auto" // 如果對話區內容多於可視區域，添加垂直滾動條
+          marginBottom={3}
         >
           {chatHistory.length > 0 ? (
             chatHistory.map((message, index) => (
@@ -79,16 +80,18 @@ export default function AssistantView() {
                 key={index}
                 display="flex"
                 justifyContent={message.user ? 'flex-end' : 'flex-start'}
+                marginBottom={1}
               >
                 <Box
                   bgcolor={message.user ? 'primary.main' : 'info.main'}
                   color="white"
                   py={1}
                   px={2}
-                  borderRadius={8}
+                  borderRadius={2}
                   mb={1}
                   maxWidth="70%"
                   wordWrap="break-word"
+                  fontSize="1.25rem"
                 >
                   {message.text}
                 </Box>

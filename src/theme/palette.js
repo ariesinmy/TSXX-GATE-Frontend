@@ -95,7 +95,7 @@ const base = {
   error,
   grey,
   common,
-  divider: alpha(grey[500], 0.2),
+  divider: alpha(grey[600], 0.3),
   action,
 };
 
