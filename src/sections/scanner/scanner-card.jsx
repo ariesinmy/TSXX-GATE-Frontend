@@ -6,25 +6,20 @@ import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Dialog from '@mui/material/Dialog';
-// import Typography from '@mui/material/Typography';
-
-// import { fCurrency } from 'src/utils/format-number';
 
 import Label from 'src/components/label';
-// import { ColorPreview } from 'src/components/color-utils';
 
 // ----------------------------------------------------------------------
 
-function MyDialog({imageSrc, open, handleCloseDialog}) {
+function MyDialog({ imageSrc, open, handleCloseDialog }) {
   return (
-      <Dialog open={open} onClose={handleCloseDialog}>
-        <img src={imageSrc} alt=''/>
-      </Dialog>
+    <Dialog open={open} onClose={handleCloseDialog}>
+      <img src={imageSrc} alt='' />
+    </Dialog>
   );
 }
 
-export default function ScannerCard({ scanItem }) {
-  // console.log(scanItem);
+export default function ScannerCard({ scanItem, upload }) {
   const [open, setOpen] = useState(false);
 
   const handleOpenDialog = () => {
@@ -35,10 +30,16 @@ export default function ScannerCard({ scanItem }) {
     setOpen(false);
   };
 
+  const getStatusColor = (status) => {
+    if (status === 'danger') return 'error';
+    if (status === 'warning') return 'warning';
+    return 'info';
+  }
+
   const renderStatus = (
     <Label
       variant="filled"
-      color={(scanItem.status === 'danger' && 'error') || 'info'}
+      color={getStatusColor(scanItem.status)}
       sx={{
         zIndex: 9,
         top: 16,
@@ -55,7 +56,7 @@ export default function ScannerCard({ scanItem }) {
     <Box
       component="img"
       alt={scanItem.name}
-      src={scanItem.cover}
+      src={upload ? URL.createObjectURL(scanItem.file) : scanItem.cover}
       sx={{
         top: 0,
         width: 1,
@@ -66,28 +67,11 @@ export default function ScannerCard({ scanItem }) {
     />
   );
 
-  // const renderPrice = (
-  //   <Typography variant="subtitle1">
-  //     <Typography
-  //       component="span"
-  //       variant="body1"
-  //       sx={{
-  //         color: 'text.disabled',
-  //         textDecoration: 'line-through',
-  //       }}
-  //     >
-  //       {scanItem.priceSale && fCurrency(scanItem.priceSale)}
-  //     </Typography>
-  //     &nbsp;
-  //     {fCurrency(scanItem.price)}
-  //   </Typography>
-  // );
-
   return (
     <Card>
       <Box
-        sx={{ pt: '100%', position: 'relative' }}
-        style={{cursor: "pointer"}}
+        sx={{ pt: '100%', width: 'auto', height: 'auto', position: 'relative' }}
+        style={{ cursor: "pointer" }}
         onClick={handleOpenDialog}
       >
         {scanItem.status && renderStatus}
@@ -99,11 +83,9 @@ export default function ScannerCard({ scanItem }) {
         <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
           {scanItem.name}
         </Link>
-
-        {/* <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={scanItem.colors} />
-          {renderPrice}
-        </Stack> */}
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          time
+        </Stack>
       </Stack>
 
       <MyDialog imageSrc={scanItem.cover} open={open} handleCloseDialog={handleCloseDialog} />
@@ -113,10 +95,11 @@ export default function ScannerCard({ scanItem }) {
 
 ScannerCard.propTypes = {
   scanItem: PropTypes.object,
+  upload: PropTypes.bool,
 };
 
 MyDialog.propTypes = {
   imageSrc: PropTypes.string,
-  open: PropTypes.object,
+  open: PropTypes.bool,
   handleCloseDialog: PropTypes.func.isRequired,
 };

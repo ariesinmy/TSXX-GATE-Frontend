@@ -11,20 +11,23 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
+  { value: 'dangerous', label: 'Dangerous' },
+  { value: 'safety', label: 'Safety' },
+  { value: 'oldest', label: 'Oldest' },
   { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' },
 ];
 
 export default function ShopProductSort() {
+  const [sortOption, setSortOption] = useState('newest');
   const [open, setOpen] = useState(null);
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (newValue) => {
+    console.log(newValue);
+    setSortOption(newValue);
     setOpen(null);
   };
 
@@ -38,7 +41,7 @@ export default function ShopProductSort() {
       >
         Sort By:&nbsp;
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          Newest
+          {SORT_OPTIONS.filter(option => option.value === sortOption)[0].label}
         </Typography>
       </Button>
 
@@ -59,7 +62,11 @@ export default function ShopProductSort() {
         }}
       >
         {SORT_OPTIONS.map((option) => (
-          <MenuItem key={option.value} selected={option.value === 'newest'} onClick={handleClose}>
+          <MenuItem
+            key={option.value}
+            selected={option.value === sortOption}
+            onClick={() => handleClose(option.value)}
+          >
             {option.label}
           </MenuItem>
         ))}

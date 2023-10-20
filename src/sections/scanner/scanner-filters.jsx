@@ -17,8 +17,9 @@ import Scrollbar from 'src/components/scrollbar';
 // ----------------------------------------------------------------------
 
 export const SORT_OPTIONS = [
-  { value: 'oldest', label: 'Oldest' },
+  { value: 'safety', label: 'Safety' },
   { value: 'newest', label: 'Newest' },
+  { value: 'oldest', label: 'Oldest' },
 ];
 export const ZOOM_OPTIONS = ['AZ', 'HQ'];
 export const DEPARTMENT_OPTIONS = [
@@ -32,21 +33,10 @@ export const DANGER_OPTIONS = [
   'Warning',
   'Danger',
 ];
-export const COLOR_OPTIONS = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107',
-];
 
 // ----------------------------------------------------------------------
 
 export default function ScannerFilters({ openFilter, onOpenFilter, onCloseFilter }) {
-
 
   const renderZoom = (
     <Stack spacing={1}>
