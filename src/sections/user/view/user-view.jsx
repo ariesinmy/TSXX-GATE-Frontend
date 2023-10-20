@@ -22,6 +22,21 @@ import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
+// users 這裡之後要 call api 使用
+// users type: return ({
+  // id: faker.string.uuid(),
+  // avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+  // employeeId,
+  // zoom: sample(['AZ', 'HQ']),
+  // department: sample([
+  //   'DEPT1',
+  //   'DEPT2',
+  //   'DEPT3',
+  //   'DEPT4',
+  // ]),
+  // shiftTime: sample(['7:30', '8:30', '9:30']),
+  // status: sample(['arrival', 'late']),
+// })
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
@@ -82,6 +97,7 @@ export default function UserPage() {
   };
 
   const handleFilterByName = (event) => {
+    console.log(event.target.value)
     setPage(0);
     setFilterName(event.target.value);
   };
@@ -113,7 +129,9 @@ export default function UserPage() {
 
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
-            <Table sx={{ minWidth: 800 }}>
+            <Table
+              sx={{ width: "100%" }}
+            >
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
@@ -122,12 +140,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
+                  { id: 'employeeId', label: 'Employee Id' },
+                  { id: 'zoom', label: 'Zoom' },
+                  { id: 'department', label: 'Department' },
+                  { id: 'shiftTime', label: 'Shift Time'},
                   { id: 'status', label: 'Status' },
-                  { id: '' },
                 ]}
               />
               <TableBody>
@@ -136,12 +153,12 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      name={row.name}
-                      role={row.role}
-                      status={row.status}
-                      company={row.company}
                       avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
+                      employeeId={row.employeeId}
+                      zoom={row.zoom}
+                      department={row.department}
+                      shiftTime={row.shiftTime}
+                      status={row.status}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />

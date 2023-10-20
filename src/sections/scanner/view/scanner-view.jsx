@@ -10,6 +10,9 @@ import { scanners } from 'src/_mock/scanner';
 import ScannerCard from '../scanner-card';
 import ScannerSort from '../scanner-sort';
 import ScannerFilters from '../scanner-filters';
+import ScannerUpload from '../scanner-upload';
+
+import Divider from '@mui/material/Divider';
 
 // ----------------------------------------------------------------------
 
@@ -30,12 +33,17 @@ export default function ScannerView() {
         Scanner
       </Typography>
 
+      <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 3 }}>
+        <ScannerUpload />
+      </Stack>
+
+      <Divider sx={{ borderStyle: 'dashed' }} />
       <Stack
         direction="row"
         alignItems="center"
         flexWrap="wrap-reverse"
         justifyContent="flex-end"
-        sx={{ mb: 5 }}
+        sx={{ mb: 1 }}
       >
         <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
           <ScannerFilters

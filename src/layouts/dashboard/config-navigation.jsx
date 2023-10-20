@@ -42,11 +42,6 @@ const navConfig = [
     path: '/report',
     icon: icon('report'),
   },
-  // {
-  //   title: 'Not found',
-  //   path: '/404',
-  //   icon: icon('ic_disabled'),
-  // },
 ];
 
 export default navConfig;

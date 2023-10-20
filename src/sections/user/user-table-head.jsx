@@ -57,6 +57,14 @@ export default function UserTableHead({
             </TableSortLabel>
           </TableCell>
         ))}
+
+        {/* 填補 TableHead 的尾部用的 */}
+        <TableCell
+            key={100}
+            align='left'
+            sx={{ width: 50, minWidth: 50 }}
+          />
+
       </TableRow>
     </TableHead>
   );

@@ -2,37 +2,35 @@ import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
-import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
-import RadioGroup from '@mui/material/RadioGroup';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
-import { ColorPicker } from 'src/components/color-utils';
 
 // ----------------------------------------------------------------------
 
 export const SORT_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
+  { value: 'oldest', label: 'Oldest' },
   { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' },
 ];
-export const GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
-export const RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
-export const PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' },
+export const ZOOM_OPTIONS = ['AZ', 'HQ'];
+export const DEPARTMENT_OPTIONS = [
+  'DEPT1',
+  'DEPT2',
+  'DEPT3',
+  'DEPT4',
+];
+export const DANGER_OPTIONS = [
+  'Normal',
+  'Warning',
+  'Danger',
 ];
 export const COLOR_OPTIONS = [
   '#00AB55',
@@ -47,86 +45,39 @@ export const COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter }) {
-  const renderGender = (
+export default function ScannerFilters({ openFilter, onOpenFilter, onCloseFilter }) {
+
+
+  const renderZoom = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Gender</Typography>
+      <Typography variant="subtitle2">Zoom</Typography>
       <FormGroup>
-        {GENDER_OPTIONS.map((item) => (
+        {ZOOM_OPTIONS.map((item) => (
           <FormControlLabel key={item} control={<Checkbox />} label={item} />
         ))}
       </FormGroup>
     </Stack>
   );
 
-  const renderCategory = (
+  const renderDept = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Category</Typography>
-      <RadioGroup>
-        {CATEGORY_OPTIONS.map((item) => (
-          <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
+      <Typography variant="subtitle2">Department</Typography>
+      <FormGroup>
+        {DEPARTMENT_OPTIONS.map((item) => (
+          <FormControlLabel key={item} control={<Checkbox />} label={item} />
         ))}
-      </RadioGroup>
+      </FormGroup>
     </Stack>
   );
 
-  const renderColors = (
+  const renderScanningResult = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Colors</Typography>
-      <ColorPicker
-        name="colors"
-        selected={[]}
-        colors={COLOR_OPTIONS}
-        onSelectColor={(color) => [].includes(color)}
-        sx={{ maxWidth: 38 * 4 }}
-      />
-    </Stack>
-  );
-
-  const renderPrice = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Price</Typography>
-      <RadioGroup>
-        {PRICE_OPTIONS.map((item) => (
-          <FormControlLabel
-            key={item.value}
-            value={item.value}
-            control={<Radio />}
-            label={item.label}
-          />
+      <Typography variant="subtitle2">Scanning Result</Typography>
+      <FormGroup>
+        {DANGER_OPTIONS.map((item) => (
+          <FormControlLabel key={item} control={<Checkbox />} label={item} />
         ))}
-      </RadioGroup>
-    </Stack>
-  );
-
-  const renderRating = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Rating</Typography>
-      <RadioGroup>
-        {RATING_OPTIONS.map((item, index) => (
-          <FormControlLabel
-            key={item}
-            value={item}
-            control={
-              <Radio
-                disableRipple
-                color="default"
-                icon={<Rating readOnly value={4 - index} />}
-                checkedIcon={<Rating readOnly value={4 - index} />}
-                sx={{
-                  '&:hover': { bgcolor: 'transparent' },
-                }}
-              />
-            }
-            label="& Up"
-            sx={{
-              my: 0.5,
-              borderRadius: 1,
-              '&:hover': { opacity: 0.48 },
-            }}
-          />
-        ))}
-      </RadioGroup>
+      </FormGroup>
     </Stack>
   );
 
@@ -167,15 +118,11 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
 
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
-            {renderGender}
+            {renderZoom}
 
-            {renderCategory}
+            {renderDept}
 
-            {renderColors}
-
-            {renderPrice}
-
-            {renderRating}
+            {renderScanningResult}
           </Stack>
         </Scrollbar>
 
@@ -196,7 +143,7 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
   );
 }
 
-ProductFilters.propTypes = {
+ScannerFilters.propTypes = {
   openFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
