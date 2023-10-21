@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import Divider from '@mui/material/Divider';
+import { useTranslation } from 'react-i18next';
 
 const style = {
     position: 'absolute',
@@ -31,6 +33,7 @@ const dateInputStyle = {
 
 // eslint-disable-next-line react/prop-types
 function ReportModal({ open, handleClose }) {
+    const { t } = useTranslation();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
@@ -48,32 +51,38 @@ function ReportModal({ open, handleClose }) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style} flex='row' justifyContent='center' alignItems='center'>
-                <Typography variant="h4" component="h2" gutterBottom>
-                    Create a new report
-                </Typography>
+            <Box sx={style} display='flex-column' justifyContent='center' alignItems='center'>
+                <Box display='flex' justifyContent='center' alignItems='center'>
+                    <Typography variant="h3" component="h2" gutterBottom>
+                        {t("report.CreateReport")}
+                    </Typography>
+                </Box>
 
-                <Box marginBottom={1}>
-                    <Typography variant="h6">Report Type</Typography>
+                <Divider variant="middle" />
+
+                <Box marginY={2}>
+                    <Typography variant="h6">{t("report.ReportType")}</Typography>
                     <RadioGroup
                         name="reportType"
                         value={selectedReportType}
                         onChange={(e) => setSelectedReportType(e.target.value)}
                     >
                         <FormControlLabel
-                            value="Attendance"
+                            value="attendance"
                             control={<Radio color="primary" />}
-                            label="Attendance"
+                            label={t("report.Attendance")}
                         />
                         <FormControlLabel
                             value="Safety Inspection"
                             control={<Radio color="primary" />}
-                            label="Safety Inspection"
+                            label={t("report.SafetyInspection")}
                         />
                     </RadioGroup>
                 </Box>
+
+
                 <Box marginBottom={2}>
-                    <Typography variant="h6">Start Date</Typography>
+                    <Typography variant="h6">{t("report.StartDate")}</Typography>
                     <input
                         type="date"
                         value={startDate}
@@ -82,7 +91,7 @@ function ReportModal({ open, handleClose }) {
                     />
                 </Box>
                 <Box marginBottom={1}>
-                    <Typography variant="h6">End Date</Typography>
+                    <Typography variant="h6">{t("report.EndDate")}</Typography>
                     <input
                         type="date"
                         value={endDate}

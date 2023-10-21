@@ -54,7 +54,13 @@
     },
     "report": {
         "Report": "Report",
-        "NewReport": "New Report"
+        "NewReport": "New Report",
+        "CreateReport": "Create a new report",
+        "ReportType": "Report Type",
+        "StartDate": "Start Date",
+        "EndDate": "End Date",
+        "Attendance": "Attendance",
+        "SafetyInspection": "Safety Inspection"
     },
     "navItem": {
         "Dashboard": "Dashboard",

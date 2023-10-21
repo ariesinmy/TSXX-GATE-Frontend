@@ -55,7 +55,13 @@
     },
     "report": {
         "Report": "週報",
-        "NewReport": "創建週報"
+        "NewReport": "創建週報",
+        "CreateReport": "創建報告",
+        "ReportType": "報告類型",
+        "StartDate": "開始日期",
+        "EndDate": "結束日期",
+        "Attendance": "出缺勤",
+        "SafetyInspection": "安全檢查"
     },
     "navItem": {
         "Dashboard": "儀表板",

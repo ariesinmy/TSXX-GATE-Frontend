@@ -8,31 +8,20 @@ import { reports } from 'src/_mock/report';
 
 import Iconify from 'src/components/iconify';
 
-import PostCard from '../report-card';
-import PostSort from '../report-sort';
-import PostSearch from '../report-search';
+import ReportCard from '../report-card';
+import ReportSort from '../report-sort';
+import ReportSearch from '../report-search';
 
 import ReportModal from '../report-modal';
 import { useTranslation } from "react-i18next";
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: 'none',
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-};
 
 // ----------------------------------------------------------------------
 
 
 export default function ReportView() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+
+  const [reportItems, setReportItems] = React.useState([...reports]);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -54,8 +43,8 @@ export default function ReportView() {
       </Stack>
 
       <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-        <PostSearch reports={reports} />
-        <PostSort
+        <ReportSearch reports={reports} />
+        <ReportSort
           options={[
             { value: 'latest', label: 'Latest' },
             { value: 'oldest', label: 'Oldest' },
@@ -64,8 +53,8 @@ export default function ReportView() {
       </Stack>
 
       <Grid container spacing={3}>
-        {reports.map((report, index) => (
-          <PostCard key={report.id} report={report} index={index} />
+        {reportItems.map((report, index) => (
+          <ReportCard key={report.id} report={report} index={index} />
         ))}
       </Grid>
 

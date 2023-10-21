@@ -21,8 +21,7 @@ const REPORT_TITLES = [
 
 export const reports = [...Array(13)].map((_, index) => ({
   id: faker.string.uuid(),
-  cover: `/assets/images/covers/cover_${index + 1}.jpg`,
   title: REPORT_TITLES[index + 1],
   createdAt: faker.date.past(),
-  avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+  avatarUrl: `/assets/images/reportAvatars/letter-${REPORT_TITLES[index + 1].includes("Attendance") ? "a" : "s"}.png`,
 }));

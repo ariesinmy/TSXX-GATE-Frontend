@@ -15,7 +15,7 @@ import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function ReportCard({ report, index }) {
-  const { cover, title, view, share, avatarUrl, createdAt } = report;
+  const { id, title, avatarUrl, createdAt } = report;
 
   const latestReportLarge = index === 0;
 
@@ -59,6 +59,20 @@ export default function ReportCard({ report, index }) {
     </Link>
   );
 
+  const handleDeleteReport = () => {
+    // eslint-disable-next-line no-alert
+    const userConfirmed = window.confirm("確定要刪除週報嗎?");
+    if (userConfirmed) {
+      console.log("success")
+        // 執行刪除操作
+        // 可以在這裡添加你的刪除報告的代碼
+    }
+  }
+
+  const handleShareReport = () => {
+    console.log(`share report:${  id}`);
+  }
+
   const renderInfo = (
     <Stack
       direction="row"
@@ -71,8 +85,8 @@ export default function ReportCard({ report, index }) {
       }}
     >
       {[
-        { number: view, icon: 'eva:eye-fill' },
-        { number: share, icon: 'eva:share-fill' },
+        { icon: 'mingcute:delete-fill' },
+        { icon: 'eva:share-fill' },
       ].map((info, _index) => (
         <Stack
           key={_index}
@@ -83,26 +97,12 @@ export default function ReportCard({ report, index }) {
               color: 'common.white',
             }),
           }}
+          onClick={_index === 0 ? handleDeleteReport : handleShareReport }
         >
-          <Iconify width={16} icon={info.icon} sx={{ mr: 0.5 }} />
+          <Iconify width={16} icon={info.icon} sx={{ mr: 0.5, cursor: "pointer" }} />
         </Stack>
       ))}
     </Stack>
-  );
-
-  const renderCover = (
-    <Box
-      component="img"
-      alt={title}
-      src={cover}
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
-    />
   );
 
   const renderDate = (

@@ -102,7 +102,6 @@ const base = {
 // ----------------------------------------------------------------------
 // mode: light or dark
 export function palette(mode) {
-  console.log(mode);
   const lightMode = {
     ...base,
     mode: 'light',
