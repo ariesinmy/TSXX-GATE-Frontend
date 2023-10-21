@@ -16,13 +16,13 @@ import AppWidgetSummary from '../app-widget-summary';
 // import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
 export default function AppView() {
   const { t, i18n } = useTranslation();
+  const rate = 91;
 
   return (
     <Container maxWidth="xl">
@@ -71,7 +71,7 @@ export default function AppView() {
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
             title={t("app.AttendanceOverview")}
-            subheader="Today's attendance rate is 91%"
+            subheader={`${t(`app.Subtitle`)  }${rate}%`}
             chart={{
               labels: [
                 '01/01/2003',

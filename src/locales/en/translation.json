@@ -11,7 +11,8 @@
       "MachineStatus": "Machine Status",
       "Overdue": "Overdue",
       "Tasks": "Tasks",
-      "Welcome": "Hi, Welcome back"
+      "Welcome": "Hi, Welcome back",
+      "Subtitle": "Today's attendance rate is"
     },
     "machine": {
         "Good": "Good",
@@ -30,5 +31,25 @@
         "DontHaveAnAccount": "Don’t have an account",
         "ContactMe": "Contact Me",
         "SigninTo": "Sign in to"
+    },
+    "employee": {
+        "Employees": "Employees",
+        "EmployeeId": "Employee Id",
+        "Zoom": "Zoom",
+        "Department": "Department",
+        "ShiftTime": "Shift Time",
+        "Status": "Status",
+        "NewEmployee": "New Employee"
+    },
+    "report": {
+        "Report": "Report",
+        "NewReport": "New Report"
+    },
+    "navItem": {
+        "Dashboard": "Dashboard",
+        "Employee": "Employee",
+        "Scanner": "Scanner",
+        "Assistant": "Assistant",
+        "Report": "Report"
     }
 }

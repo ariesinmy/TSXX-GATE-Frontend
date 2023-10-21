@@ -21,10 +21,12 @@ import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function Nav({ openNav, onCloseNav }) {
+  const { t } = useTranslation();
   const pathname = usePathname();
 
   const upLg = useResponsive('up', 'lg');
@@ -133,6 +135,8 @@ Nav.propTypes = {
 // ----------------------------------------------------------------------
 
 function NavItem({ item }) {
+  const { t } = useTranslation();
+
   const pathname = usePathname();
 
   const active = item.path === pathname;
@@ -162,7 +166,7 @@ function NavItem({ item }) {
         {item.icon}
       </Box>
 
-      <Box component="span">{item.title}</Box>
+      <Box component="span">{ t(`navItem.${item.title}`)}</Box>
     </ListItemButton>
   );
 }

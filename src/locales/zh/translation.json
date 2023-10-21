@@ -11,7 +11,8 @@
         "MachineStatus": "設備狀態",
         "Overdue": "遲到",
         "Tasks": "任務",
-        "Welcome": "嗨，歡迎回來"
+        "Welcome": "嗨，歡迎回來",
+        "Subtitle": "今日的出席率是"
     },
     "machine": {
         "Good": "正常",
@@ -30,5 +31,25 @@
         "DontHaveAnAccount": "還沒有賬號",
         "ContactMe": "聯絡我",
         "SigninTo": "歡迎進入"
+    },
+    "employee": {
+        "Employees": "員工",
+        "EmployeeId": "員工編號",
+        "Zoom": "廠區",
+        "Department": "部門",
+        "ShiftTime": "班次",
+        "Status": "狀態",
+        "NewEmployee": "創建員工"
+    },
+    "report": {
+        "Report": "週報",
+        "NewReport": "創建週報"
+    },
+    "navItem": {
+        "Dashboard": "儀表板",
+        "Employee": "員工",
+        "Scanner": "掃描儀",
+        "Assistant": "小助手",
+        "Report": "週報"
     }
 }

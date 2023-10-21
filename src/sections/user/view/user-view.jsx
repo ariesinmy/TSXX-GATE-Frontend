@@ -21,6 +21,7 @@ import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import { useTranslation } from 'react-i18next';
 
 // users 這裡之後要 call api 使用
 // users type: return ({
@@ -40,6 +41,8 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
+  const {t} = useTranslation();
+
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -113,10 +116,10 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Employees</Typography>
+        <Typography variant="h4">{t("employee.Employees")}</Typography>
 
         <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
+          {t("employee.NewEmployee")}
         </Button>
       </Stack>
 
@@ -140,11 +143,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'employeeId', label: 'Employee Id' },
-                  { id: 'zoom', label: 'Zoom' },
-                  { id: 'department', label: 'Department' },
-                  { id: 'shiftTime', label: 'Shift Time'},
-                  { id: 'status', label: 'Status' },
+                  { id: 'employeeId', label: t("employee.EmployeeId")},
+                  { id: 'zoom', label: t("employee.Zoom")},
+                  { id: 'department', label: t("employee.Department")},
+                  { id: 'shiftTime', label: t("employee.ShiftTime")},
+                  { id: 'status', label: t("employee.Status")},
                 ]}
               />
               <TableBody>

@@ -12,9 +12,8 @@ import PostCard from '../report-card';
 import PostSort from '../report-sort';
 import PostSearch from '../report-search';
 
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import ReportModal from '../report-modal';
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: 'absolute',
@@ -33,6 +32,8 @@ const style = {
 
 
 export default function ReportView() {
+  const { t, i18n } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,7 +41,7 @@ export default function ReportView() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Report</Typography>
+        <Typography variant="h4">{t("report.Report")}</Typography>
 
         <Button
           variant="contained"
@@ -48,7 +49,7 @@ export default function ReportView() {
           startIcon={<Iconify icon="eva:plus-fill" />}
           onClick={handleOpen}
         >
-          New Report
+          {t("report.NewReport")}
         </Button>
       </Stack>
 
