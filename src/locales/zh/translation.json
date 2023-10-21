@@ -12,7 +12,13 @@
         "Overdue": "遲到",
         "Tasks": "任務",
         "Welcome": "嗨，歡迎回來",
-        "Subtitle": "今日的出席率是"
+        "Subtitle": "今日的出席率是",
+        "Late": "遲到",
+        "Early": "早到",
+        "ToolScanTime": "掃描用時",
+        "OnTime": "準時",
+        "AttendanceChartAZ": "出勤狀況圖表: AZ",
+        "AttendanceChartHQ": "出勤狀況圖表: HQ"
     },
     "machine": {
         "Good": "正常",

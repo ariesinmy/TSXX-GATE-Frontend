@@ -25,7 +25,7 @@ export default function AppView() {
   const { t, i18n } = useTranslation();
   const rate = 91;
 
-  const [deptAZ, setDeptAZ] = useState("dept1");
+  const [deptAZ, setDeptAZ] = useState("dept1"); // dept1, dept2, dept3, dept4
   const [deptHQ, setDeptHQ] = useState("dept1");
 
   const handleSelectDeptAZ = (value) => {

@@ -35,7 +35,7 @@ const StyledChart = styled(Chart)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function AppCurrentVisits({ title, subheader, chart, dept, selectDEPT, ...other }) {
-  console.log(dept)
+  
   const theme = useTheme();
 
   const { colors, series, options } = chart;
@@ -87,7 +87,7 @@ export default function AppCurrentVisits({ title, subheader, chart, dept, select
 
   return (
     <Card {...other}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mx: 3}}>
         <Box><CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} /></Box>
         {
           dept

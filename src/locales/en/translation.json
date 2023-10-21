@@ -15,7 +15,9 @@
       "Subtitle": "Today's attendance rate is", 
       "Early": "Early",
       "ToolScanTime": "Tool Scan Time",
-      "OnTime": "On Time"
+      "OnTime": "On Time",
+      "AttendanceChartAZ": "Attendance Chart: AZ",
+      "AttendanceChartHQ": "Attendance Chart: HQ"
     },
     "machine": {
         "Good": "Good",
