@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 
 import Iconify from 'src/components/iconify';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -13,6 +14,7 @@ ReportSearch.propTypes = {
 };
 
 export default function ReportSearch({ reports }) {
+  const { t } = useTranslation();
   return (
     <Autocomplete
       sx={{ width: 280 }}
@@ -34,7 +36,7 @@ export default function ReportSearch({ reports }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search report..."
+          placeholder={`${t("report.SearchReport")}...`}
           InputProps={{
             ...params.InputProps,
             startAdornment: (

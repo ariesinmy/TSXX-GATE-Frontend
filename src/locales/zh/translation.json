@@ -56,6 +56,14 @@
         "Filters": "過濾",
         "SortBy": "排序"
     },
+    "assistant": {
+        "Assistant": "小助手",
+        "RefreshChat": "清空對話",
+        "Content1": "嗨, 我是你的人工智能助手",
+        "Content2": "讓開始我們今天的對話吧",
+        "SendYourMessage": "填寫您的訊息",
+        "Send": "發送"
+    },
     "report": {
         "Report": "週報",
         "NewReport": "創建週報",
@@ -64,7 +72,9 @@
         "StartDate": "開始日期",
         "EndDate": "結束日期",
         "Attendance": "出缺勤",
-        "SafetyInspection": "安全檢查"
+        "SafetyInspection": "安全檢查",
+        "SearchReport": "搜索週報",
+        "Wait": "正在回信"
     },
     "navItem": {
         "Dashboard": "儀表板",

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable new-cap */
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -11,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import { fDate } from 'src/utils/format-time';
 
 import Iconify from 'src/components/iconify';
+
+import jsPDF from 'jspdf';
 
 // ----------------------------------------------------------------------
 
@@ -71,6 +75,24 @@ export default function ReportCard({ report, index }) {
 
   const handleShareReport = () => {
     console.log(`share report:${  id}`);
+    const emailSubject = title; // 电子邮件主题
+    const emailBody = 'This is a content of a weekly report email, you can send it to your senior or manager or any department manager, Let every examine the current situation in the company'; // 电子邮件内容
+
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = mailtoLink;
+  }
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.text('Hello, this is a PDF!', 10, 10);
+    const test = doc.save('sample.pdf');
+  };
+
+  const getIconHandler = (iconIndex) => {
+    if (iconIndex === 0) return () => handleDeleteReport();
+    if (iconIndex === 1) return () => handleShareReport();
+    return () => generatePDF();
   }
 
   const renderInfo = (
@@ -87,6 +109,7 @@ export default function ReportCard({ report, index }) {
       {[
         { icon: 'mingcute:delete-fill' },
         { icon: 'eva:share-fill' },
+        { icon: 'ph:download-fill' },
       ].map((info, _index) => (
         <Stack
           key={_index}
@@ -97,7 +120,7 @@ export default function ReportCard({ report, index }) {
               color: 'common.white',
             }),
           }}
-          onClick={_index === 0 ? handleDeleteReport : handleShareReport }
+          onClick={getIconHandler(_index)}
         >
           <Iconify width={16} icon={info.icon} sx={{ mr: 0.5, cursor: "pointer" }} />
         </Stack>
