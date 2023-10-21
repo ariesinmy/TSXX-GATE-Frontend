@@ -27,7 +27,6 @@ export default function ShopProductSort() {
   };
 
   const handleClose = (newValue) => {
-    console.log(newValue);
     setSortOption(newValue);
     setOpen(null);
   };
@@ -42,14 +41,14 @@ export default function ShopProductSort() {
       >
         {t("scanner.SortBy")}:&nbsp;
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          {SORT_OPTIONS.filter(option => option.value === sortOption)[0].label}
+          {t(`scanner.${SORT_OPTIONS.filter(option => option.value === sortOption)[0].label}`)}
         </Typography>
       </Button>
 
       <Menu
         open={!!open}
         anchorEl={open}
-        onClose={handleClose}
+        onClose={() => setOpen(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         slotProps={{
@@ -68,7 +67,7 @@ export default function ShopProductSort() {
             selected={option.value === sortOption}
             onClick={() => handleClose(option.value)}
           >
-            {option.label}
+            {t(`scanner.${option.label}`)}
           </MenuItem>
         ))}
       </Menu>

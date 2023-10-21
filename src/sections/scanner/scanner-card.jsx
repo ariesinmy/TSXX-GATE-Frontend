@@ -56,7 +56,7 @@ export default function ScannerCard({ scanItem, upload }) {
     <Box
       component="img"
       alt={scanItem.name}
-      src={upload ? URL.createObjectURL(scanItem.file) : scanItem.cover}
+      src={scanItem.cover}
       sx={{
         top: 0,
         width: 1,
@@ -83,9 +83,6 @@ export default function ScannerCard({ scanItem, upload }) {
         <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
           {scanItem.name}
         </Link>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          time
-        </Stack>
       </Stack>
 
       <MyDialog imageSrc={scanItem.cover} open={open} handleCloseDialog={handleCloseDialog} />

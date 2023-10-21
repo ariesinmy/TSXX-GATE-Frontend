@@ -54,7 +54,11 @@
         "Scanner": "掃描儀",
         "UploadNewImage": "上傳新的圖片",
         "Filters": "過濾",
-        "SortBy": "排序"
+        "SortBy": "排序",
+        "Dangerous": "最危險",
+        "Safety": "最安全",
+        "Oldest": "最舊",
+        "Newest": "最新"
     },
     "assistant": {
         "Assistant": "小助手",

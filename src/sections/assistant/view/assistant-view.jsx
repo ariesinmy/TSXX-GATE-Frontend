@@ -101,7 +101,7 @@ export default function AssistantView() {
                       borderRadius={2}
                       mb={1}
                       maxWidth="70%"
-                      wordWrap="break-word"
+                      wordwrap="white-space"
                       fontSize="1.25rem"
                     >
                       {message.text}
@@ -123,7 +123,7 @@ export default function AssistantView() {
                       borderRadius={2}
                       mb={1}
                       maxWidth="70%"
-                      wordWrap="break-word"
+                      wordwrap="white-space"
                       fontSize="1.25rem"
                     >
                       <TypewriterText text={`${t("report.Wait")}...`} />

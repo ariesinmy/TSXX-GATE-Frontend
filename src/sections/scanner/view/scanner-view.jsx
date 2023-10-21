@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
@@ -13,8 +13,8 @@ import ScannerFilters from '../scanner-filters';
 import ScannerUpload from '../scanner-upload';
 
 import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 
 // ----------------------------------------------------------------------
@@ -27,10 +27,62 @@ import { useTranslation } from 'react-i18next';
 // }
 
 export default function ScannerView() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const [openFilter, setOpenFilter] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState([]); // 跟踪已上传的图像数据
+  const [labeledImage, setLabeledImageImage] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFileChange = (event) => {
+    console.log("file change", event);
+    setIsProcessing(true);
+    setSelectedFile(event.target.files[0]);
+  };
+
+  useEffect(() => {
+    const newImageInference = async () => {
+      if (!selectedFile) return;
+
+      const fileName = selectedFile?.name ?? `upload_image${selectedFile.length}`;
+      const formData = new FormData();
+      formData.append('img_file', selectedFile);
+
+      axios({
+        method: 'post',
+        url: `http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/common/imageInference`,
+        data: formData,
+        responseType: 'blob', // 设置响应类型为 Blob
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+        .then((response) => {
+          // 处理成功的响应
+          console.log('成功：', response.data);
+          const blob = new Blob([response.data], { type: 'image/jpeg' });
+          const url = URL.createObjectURL(blob);
+
+          const imageData = {
+            id: Date.now(), // 使用时间戳作为唯一 ID
+            name: fileName,
+            cover: url,
+            status: "danger",
+          };
+
+          const newLabeledImageList = [...labeledImage]
+          newLabeledImageList.push(imageData);
+          setLabeledImageImage(newLabeledImageList);
+          setIsProcessing(false);
+        })
+        .catch((error) => {
+          // 处理错误
+          console.error('错误：', error);
+        });
+    }
+    newImageInference();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFile])
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -40,46 +92,23 @@ export default function ScannerView() {
     setOpenFilter(false);
   };
 
-  // 处理文件上传
-  const handleImageUpload = (event) => {
-
-    console.log(event.target.files[0]);
-    const file = event.target.files[0];
-    const imageUrl = URL.createObjectURL(file); // 创建图像URL
-    const fileName = file.name;
-    if (file) {
-      const imageData = {
-        id: Date.now(), // 使用时间戳作为唯一ID
-        name: fileName,
-        cover: imageUrl,
-        status: "danger",
-        file,
-      };
-
-      const newUploadImageList = [...uploadedImage]
-      newUploadImageList.push(imageData);
-      setUploadedImage(newUploadImageList);
-    }
-  };
-
-
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
         {t("scanner.Scanner")}
       </Typography>
 
-      {uploadedImage && (
-        <Grid container spacing={3} sx={{my: 4}}>
+      {labeledImage && (
+        <Grid container spacing={3} sx={{ my: 4 }}>
           {
-            uploadedImage.map(imageObj =>
-              <Grid xs={12} sm={6} md={3}>
+            labeledImage.map((imageObj, index) =>
+              <Grid xs={12} sm={6} md={3} key={index}>
                 <ScannerCard scanItem={imageObj} upload />
               </Grid>
             )
           }
           <Grid xs={12} sm={6} md={3}>
-            <ScannerUpload onImageUpload={handleImageUpload} />
+            <ScannerUpload onImageUpload={handleFileChange} isProcessing={isProcessing}/>
           </Grid>
         </Grid>
       )}

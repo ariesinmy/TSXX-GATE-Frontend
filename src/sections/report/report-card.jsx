@@ -73,7 +73,7 @@ export default function ReportCard({ report, index }) {
     }
   }
 
-  const handleShareReport = () => {
+  const handleSendMailReport = () => {
     console.log(`share report:${  id}`);
     const emailSubject = title; // 电子邮件主题
     const emailBody = 'This is a content of a weekly report email, you can send it to your senior or manager or any department manager, Let every examine the current situation in the company'; // 电子邮件内容
@@ -83,6 +83,8 @@ export default function ReportCard({ report, index }) {
     window.location.href = mailtoLink;
   }
 
+  const handleDirectMailReport = () => {};
+
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.text('Hello, this is a PDF!', 10, 10);
@@ -91,7 +93,8 @@ export default function ReportCard({ report, index }) {
 
   const getIconHandler = (iconIndex) => {
     if (iconIndex === 0) return () => handleDeleteReport();
-    if (iconIndex === 1) return () => handleShareReport();
+    if (iconIndex === 1) return () => handleSendMailReport();
+    if (iconIndex === 2) return () => handleDirectMailReport();
     return () => generatePDF();
   }
 
@@ -108,6 +111,7 @@ export default function ReportCard({ report, index }) {
     >
       {[
         { icon: 'mingcute:delete-fill' },
+        { icon: 'majesticons:mail'},
         { icon: 'eva:share-fill' },
         { icon: 'ph:download-fill' },
       ].map((info, _index) => (

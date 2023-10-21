@@ -20,3 +20,5 @@
     ```
     - 在專案中使用 `import.meta.env.VITE_TEST_VARIABLE`(return 'test') 進行讀取
     - 參考: https://vitejs.dev/guide/env-and-mode.html
+- 讀取 server 回傳的 binary string image 的解決方法 https://blog.csdn.net/w57685321/article/details/109010380
+    - 該方法使用在 scanner-view.jsx

@@ -53,7 +53,15 @@
         "Scanner": "Scanner",
         "UploadNewImage": "Upload New Image",
         "Filters": "Filters",
-        "SortBy": "Sort By"
+        "SortBy": "Sort By",
+        "Dangerous": "Dangerous",
+        "Safety": "Safety",
+        "Oldest": "Oldest",
+        "Newest": "Newest",
+        "dangerous": "dangerous",
+        "safety": "safety",
+        "oldest": "oldest",
+        "newest": "newest"
     },
     "assistant": {
         "Assistant": "Assistant",
