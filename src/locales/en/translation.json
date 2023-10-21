@@ -44,7 +44,10 @@
         "Department": "Department",
         "ShiftTime": "Shift Time",
         "Status": "Status",
-        "NewEmployee": "New Employee"
+        "NewEmployee": "New Employee",
+        "early": "early",
+        "late": "late",
+        "arrival": "arrival"
     },
     "scanner": {
         "Scanner": "Scanner",

@@ -30,8 +30,8 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       intersect: false,
       y: {
         formatter: (value) => {
-          if (typeof value !== 'undefined') {
-            return `${value.toFixed(0)} people`;
+          if (value !== undefined && value !== null) {
+            return `${value.toFixed(2)} sec`;
           }
           return value;
         },

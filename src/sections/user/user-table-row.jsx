@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ export default function UserTableRow({
   selected,
   handleClick,
 }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -70,7 +72,8 @@ export default function UserTableRow({
         <TableCell >{shiftTime}</TableCell>
 
         <TableCell>
-          <Label color={checkStatus(status)}>{status}</Label>
+          {/* status -> early, arrival, late */}
+          <Label color={checkStatus(status)}>{t(`employee.${status}`)}</Label>
         </TableCell>
 
         <TableCell align="right">

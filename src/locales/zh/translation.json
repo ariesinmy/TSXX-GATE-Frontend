@@ -45,7 +45,10 @@
         "Department": "部門",
         "ShiftTime": "班次",
         "Status": "狀態",
-        "NewEmployee": "創建員工"
+        "NewEmployee": "創建員工",
+        "early": "早到",
+        "late": "遲到",
+        "arrival": "準時"
     },
     "scanner": {
         "Scanner": "掃描儀",
