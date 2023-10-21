@@ -26,7 +26,44 @@ export default function AppView() {
   const [scanRecordAZ, setScanRecordAZ] = useState([]); // [{zone: string, timeStamp: }]
   const [scanRecordHQ, setScanRecordHQ] = useState([]);
 
+  const [attendanceDataList, setAttendanceDataList] = useState([]);
+
+
   useEffect(() => {
+    // 定义日期范围
+    const startTimestamp = Math.floor(new Date('2023-09-11').getTime() / 1000) - (8 * 3600); // 减去8小时的秒数
+    const endTimestamp = Math.floor(new Date('2023-09-23').getTime() / 1000) - (8 * 3600); // 减去8小时的秒数
+    const apiEndpoint = `http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/enterRecord/totalLateDistributed`;
+    
+    // 构建时间戳数组
+    const timestampArray = [];
+    let currentTimestamp = startTimestamp;
+    while (currentTimestamp < endTimestamp) {
+      timestampArray.push(currentTimestamp);
+      currentTimestamp += 86400; // 增加一天的秒数
+    }
+    
+    // 发起API请求并整合结果
+    const fetchData = async () => {
+      try {
+        const responsePromises = timestampArray.map(async (timestamp) => {
+          const response = await axios.get(apiEndpoint, {
+            params: {
+              start_timestamp: timestamp,
+              end_timestamp: timestamp + 86400,
+            },
+          });
+          return response.data; // 假设API响应是一个对象
+        });
+        
+        const responses = await Promise.all(responsePromises);
+        console.log(responses);
+        setAttendanceDataList(responses);
+      } catch (error) {
+        console.error(`API请求失败：${error}`);
+      }
+    };
+
     const fetchMachineRecordData = async () => {
       try {
         const response = await axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/machineRecord/?start_timestamp=1670189220&end_timestamp=1695345420`);
@@ -85,6 +122,8 @@ export default function AppView() {
     };
 
     fetchMachineRecordData();
+    
+    fetchData();
   }, []);
 
 
@@ -100,6 +139,11 @@ export default function AppView() {
     // code
   };
 
+  const getAttendTotal = () => {
+    const lastEle = attendanceDataList[attendanceDataList.length - 1];
+    return lastEle.theNumberOfEarly + lastEle.theNumberOfOnTime + lastEle.theNumberOfLate
+  }
+
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
@@ -107,25 +151,27 @@ export default function AppView() {
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={t("app.AttendanceCount")}
-            total={159}
+            total={attendanceDataList.length > 0 ? getAttendTotal() : 0}
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/fingerprint.png" />}
+            itemType="number"
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={t("app.LateArrivals")}
-            total={12}
+            total={attendanceDataList.length > 0 ? attendanceDataList[attendanceDataList.length - 1].theNumberOfLate : 0}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/overdue.png" />}
+            itemType="number"
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={4}>
           <AppWidgetSummary
             title={t("app.MachineStatus")}
             total={-1}
@@ -135,55 +181,47 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
-          <AppWidgetSummary
-            title={t("app.Contraband")}
-            total={5}
-            color="error"
-            icon={<img alt="icon" src="/assets/icons/glass/alert.png" />}
-          />
-        </Grid>
-
         {/* 出勤概覽 + 員工數量 ============================================================================ */}
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
             title={t("app.AttendanceOverview")}
-            subheader={`${t(`app.Subtitle`)} ${rate}%`}
+            // subheader={`${t(`app.Subtitle`)} ${rate}%`}
             chart={{
               labels: [
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
+                '09/12/2023',
+                '09/13/2023',
+                '09/14/2023',
+                '09/15/2023',
+                '09/16/2023',
+                '09/17/2023',
+                '09/18/2023',
+                '09/19/2023',
+                '09/20/2023',
+                '09/21/2023',
+                '09/22/2023',
               ],
               series: [
                 {
                   name: t("app.OnTime"),
                   type: 'line',
                   fill: 'solid',
-                  data: [35, 32, 36, 47, 45, 52, 64, 52, 59, 49, 39],
+                  data: attendanceDataList.map(item => item.theNumberOfOnTime),
                 },
                 {
                   name: t("app.Late"),
                   type: 'line',
                   fill: 'solid',
-                  data: [30, 21, 14, 29, 22, 43, 21, 41, 15, 27, 43],
+                  data: attendanceDataList.map(item => item.theNumberOfLate),
                 },
                 {
                   name: t("app.Early"),
                   type: 'line',
                   fill: 'solid',
-                  data: [10, 6, 12, 9, 5, 8, 20, 14, 16, 27, 3],
+                  data: attendanceDataList.map(item => item.theNumberOfEarly),
                 },
-              ],
+              ]
             }}
+            chartType="attendance"
           />
         </Grid>
 

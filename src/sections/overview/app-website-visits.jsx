@@ -8,7 +8,7 @@ import Chart, { useChart } from 'src/components/chart';
 
 // ----------------------------------------------------------------------
 
-export default function AppWebsiteVisits({ title, subheader, chart, ...other }) {
+export default function AppWebsiteVisits({ title, subheader, chart, chartType, ...other }) {
   const { labels, colors, series, options } = chart;
 
   const chartOptions = useChart({
@@ -31,7 +31,7 @@ export default function AppWebsiteVisits({ title, subheader, chart, ...other }) 
       y: {
         formatter: (value) => {
           if (value !== undefined && value !== null) {
-            return `${value.toFixed(2)} sec`;
+            return `${chartType === 'attendance' ? value : value.toFixed(2)} ${chartType === 'attendance' ? "person" : "sec"}`;
           }
           return value;
         },
@@ -62,4 +62,5 @@ AppWebsiteVisits.propTypes = {
   chart: PropTypes.object,
   subheader: PropTypes.string,
   title: PropTypes.string,
+  chartType: PropTypes.string,
 };

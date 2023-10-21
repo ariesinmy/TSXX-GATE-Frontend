@@ -11,7 +11,7 @@ import { useTranslation, Trans } from "react-i18next";
 
 // ----------------------------------------------------------------------
 
-export default function AppWidgetSummary({ title, total, status, icon, color = 'primary', sx, ...other }) {
+export default function AppWidgetSummary({ title, total, status, icon, color = 'primary', itemType, sx, ...other }) {
   const { t, i18n } = useTranslation();
   
   function fMachineStatus(isGood) {
@@ -35,10 +35,9 @@ export default function AppWidgetSummary({ title, total, status, icon, color = '
 
       <Stack spacing={0.5}>
         {
-          total && total >= 0
-          ? (<Typography variant="h4">{fShortenNumber(total)}</Typography>)
+          itemType || (total && total >= 0)
+          ? (<Typography variant="h4">{fShortenNumber(total) || "Loading..."}</Typography>)
           : (<Typography variant="h4">{
-            // t(`format.${fMachineStatus(true)}`)
             t("status", fMachineStatus(true))
           }</Typography>)
         }
@@ -59,5 +58,6 @@ AppWidgetSummary.propTypes = {
   sx: PropTypes.object,
   title: PropTypes.string,
   total: PropTypes.number,
-  status: PropTypes.bool
+  status: PropTypes.bool,
+  itemType: PropTypes.string,
 };

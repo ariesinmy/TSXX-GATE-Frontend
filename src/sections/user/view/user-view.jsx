@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
@@ -9,8 +10,9 @@ import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import { users } from 'src/_mock/user';
+// import { users } from 'src/_mock/user';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
@@ -22,6 +24,8 @@ import TableEmptyRows from '../table-empty-rows';
 import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { grey } from 'src/theme/palette';
 
 // users 這裡之後要 call api 使用
 // users type: return ({
@@ -54,6 +58,26 @@ export default function UserPage() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchEmployeeData = async () => {
+      try {
+        const response = await axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/enterRecord/?start_timestamp=1695225600&end_timestamp=1695312000`);
+        const data = response.data;
+        const updatedObjList = data.map((obj, index) => ({
+            ...obj,
+            avatarUrl: `/assets/images/avatars/avatar_${Math.floor(Math.random() * 25) + 1}.jpg`
+          }
+        ));
+        setUsers(updatedObjList);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchEmployeeData();
+  }, []);
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -151,7 +175,11 @@ export default function UserPage() {
                 ]}
               />
               <TableBody>
-                {dataFiltered
+                {users.length === 0 ?
+                  <Box sx={{ m: 4, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <CircularProgress size="5rem" color='grey'/>
+                  </Box>:
+                dataFiltered
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
@@ -165,7 +193,8 @@ export default function UserPage() {
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
-                  ))}
+                  ))
+                }
 
                 <TableEmptyRows
                   height={77}

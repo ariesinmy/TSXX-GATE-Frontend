@@ -47,7 +47,7 @@
         "NewEmployee": "New Employee",
         "early": "early",
         "late": "late",
-        "arrival": "arrival"
+        "on-time": "on-time"
     },
     "scanner": {
         "Scanner": "Scanner",
