@@ -6,6 +6,7 @@ import intervalPlural from "i18next-intervalplural-postprocessor";
 
 import translationEN from "./locales/en/translation.json";
 import translationZH from "./locales/zh/translation.json";
+import translationJP from "./locales/jp/translation.json";
 
 const resources = {
   en: {
@@ -14,6 +15,9 @@ const resources = {
   zh: {
     translation: translationZH,
   },
+  jp: {
+    translation: translationJP,
+  }
 };
 
 i18n.use(initReactI18next).use(intervalPlural).use(LanguageDetector).init({

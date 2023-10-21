@@ -6,13 +6,16 @@
       "AttendanceOverview": "Attendance Overview",
       "EmployeeCount": "Employee Count",
       "EmployeeDistribution": "Employee Distribution",
-      "ErrorLogs": "Error Logs",
+      "Contraband": "Contraband",
       "LateArrivals": "Late Arrivals",
       "MachineStatus": "Machine Status",
-      "Overdue": "Overdue",
+      "Late": "Late",
       "Tasks": "Tasks",
       "Welcome": "Hi, Welcome back",
-      "Subtitle": "Today's attendance rate is"
+      "Subtitle": "Today's attendance rate is", 
+      "Early": "Early",
+      "ToolScanTime": "Tool Scan Time",
+      "OnTime": "On Time"
     },
     "machine": {
         "Good": "Good",
@@ -35,11 +38,17 @@
     "employee": {
         "Employees": "Employees",
         "EmployeeId": "Employee Id",
-        "Zoom": "Zoom",
+        "Zone": "Zone",
         "Department": "Department",
         "ShiftTime": "Shift Time",
         "Status": "Status",
         "NewEmployee": "New Employee"
+    },
+    "scanner": {
+        "Scanner": "Scanner",
+        "UploadNewImage": "Upload New Image",
+        "Filters": "Filters",
+        "SortBy": "Sort By"
     },
     "report": {
         "Report": "Report",

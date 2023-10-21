@@ -27,7 +27,7 @@ export default function DashboardLayout({ children, themeMode, setThemeMode }) {
           flexDirection: { xs: 'column', lg: 'row' },
         }}
       >
-        <Nav openNav={openNav} onCloseNav={() => setOpenNav(false)}/>
+        <Nav openNav={openNav} onCloseNav={() => setOpenNav(false)} themeMode={themeMode}/>
 
         <Main>{children}</Main>
       </Box>

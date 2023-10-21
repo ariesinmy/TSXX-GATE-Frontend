@@ -6,7 +6,7 @@
         "AttendanceOverview": "出勤概覽",
         "EmployeeCount": "員工數量",
         "EmployeeDistribution": "員工分布",
-        "ErrorLogs": "錯誤日志",
+        "Contraband": "違禁物品",
         "LateArrivals": "遲到人數",
         "MachineStatus": "設備狀態",
         "Overdue": "遲到",
@@ -35,11 +35,17 @@
     "employee": {
         "Employees": "員工",
         "EmployeeId": "員工編號",
-        "Zoom": "廠區",
+        "Zone": "廠區",
         "Department": "部門",
         "ShiftTime": "班次",
         "Status": "狀態",
         "NewEmployee": "創建員工"
+    },
+    "scanner": {
+        "Scanner": "掃描儀",
+        "UploadNewImage": "上傳新的圖片",
+        "Filters": "過濾",
+        "SortBy": "排序"
     },
     "report": {
         "Report": "週報",

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useTranslation } from 'react-i18next';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -17,6 +18,7 @@ const VisuallyHiddenInput = styled('input')({
 
 // eslint-disable-next-line react/prop-types
 export default function ScannerUpload({ onImageUpload }) {
+    const {t} = useTranslation();
     const handleFileChange = (event) => {
         if (onImageUpload) {
             onImageUpload(event);
@@ -30,7 +32,7 @@ export default function ScannerUpload({ onImageUpload }) {
             startIcon={<CloudUploadIcon />}
             sx={{ width: "270px", height: "250px", fontSize: "1.2rem", borderRadius: "18px" }}
         >
-            Upload New Image
+            {t("scanner.UploadNewImage")}
             <VisuallyHiddenInput type="file" onChange={handleFileChange}/>
         </Button>
     );

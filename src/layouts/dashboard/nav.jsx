@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
-export default function Nav({ openNav, onCloseNav }) {
+export default function Nav({ openNav, onCloseNav, themeMode }) {
   const { t } = useTranslation();
   const pathname = usePathname();
 
@@ -82,7 +82,7 @@ export default function Nav({ openNav, onCloseNav }) {
         },
       }}
     >
-      <Logo sx={{ mt: 3, ml: 4 }} />
+      <Logo sx={{ mt: 3, ml: 4 }} themeMode={themeMode}/>
 
       {renderAccount}
 
@@ -130,6 +130,7 @@ export default function Nav({ openNav, onCloseNav }) {
 Nav.propTypes = {
   openNav: PropTypes.bool,
   onCloseNav: PropTypes.func,
+  themeMode: PropTypes.string,
 };
 
 // ----------------------------------------------------------------------

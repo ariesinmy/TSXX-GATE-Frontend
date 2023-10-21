@@ -7,7 +7,7 @@ import { listClasses } from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
-
+import { useTranslation } from 'react-i18next';
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
@@ -18,6 +18,7 @@ const SORT_OPTIONS = [
 ];
 
 export default function ShopProductSort() {
+  const {t} = useTranslation();
   const [sortOption, setSortOption] = useState('newest');
   const [open, setOpen] = useState(null);
 
@@ -39,7 +40,7 @@ export default function ShopProductSort() {
         onClick={handleOpen}
         endIcon={<Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />}
       >
-        Sort By:&nbsp;
+        {t("scanner.SortBy")}:&nbsp;
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
           {SORT_OPTIONS.filter(option => option.value === sortOption)[0].label}
         </Typography>

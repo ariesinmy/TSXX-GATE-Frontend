@@ -144,7 +144,7 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'employeeId', label: t("employee.EmployeeId")},
-                  { id: 'zoom', label: t("employee.Zoom")},
+                  { id: 'zoom', label: t("employee.Zone")},
                   { id: 'department', label: t("employee.Department")},
                   { id: 'shiftTime', label: t("employee.ShiftTime")},
                   { id: 'status', label: t("employee.Status")},

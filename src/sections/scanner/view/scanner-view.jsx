@@ -14,17 +14,21 @@ import ScannerUpload from '../scanner-upload';
 
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
+
 
 // ----------------------------------------------------------------------
 // scannerItem
 // {
 //     "id": "16c8098d-9f79-4fdd-be67-c0084b702563",
 //     "cover": "/assets/images/products/product_21.jpg",
-//     "name": "Nike Air Zoom SuperRep",
+//     "name": "Nike Air Zone SuperRep",
 //     "status": "danger"
 // }
 
 export default function ScannerView() {
+  const {t} = useTranslation();
+
   const [openFilter, setOpenFilter] = useState(false);
   const [uploadedImage, setUploadedImage] = useState([]); // 跟踪已上传的图像数据
 
@@ -62,7 +66,7 @@ export default function ScannerView() {
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Scanner
+        {t("scanner.Scanner")}
       </Typography>
 
       {uploadedImage && (

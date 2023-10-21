@@ -31,12 +31,12 @@ const PRODUCT_NAME = [
 
 // ----------------------------------------------------------------------
 
-export const scanners = [...Array(24)].map((_, index) => {
+export const scanners = [...Array(16)].map((_, index) => {
   const setIndex = index + 1;
 
   return {
     id: faker.string.uuid(),
-    cover: `/assets/images/products/product_${setIndex}.jpg`,
+    cover: `/assets/images/scanImages/TRAIN_${setIndex}.jpg`,
     name: PRODUCT_NAME[index],
     status: sample(['danger', 'normal', 'warning']), // 從collection(list or object)回傳一個隨機的元素
   };

@@ -1,19 +1,20 @@
-// import { faker } from '@faker-js/faker';
+import { useState } from 'react';
+import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-// import Iconify from 'src/components/iconify';
+import Iconify from 'src/components/iconify';
 
 import AppTasks from '../app-tasks';
-// import AppNewsUpdate from '../app-news-update';
-// import AppOrderTimeline from '../app-order-timeline';
+import AppNewsUpdate from '../app-news-update';
+import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
-// import AppTrafficBySite from '../app-traffic-by-site';
-// import AppCurrentSubject from '../app-current-subject';
+import AppTrafficBySite from '../app-traffic-by-site';
+import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 
 import { useTranslation } from "react-i18next";
@@ -23,6 +24,21 @@ import { useTranslation } from "react-i18next";
 export default function AppView() {
   const { t, i18n } = useTranslation();
   const rate = 91;
+
+  const [deptAZ, setDeptAZ] = useState("dept1");
+  const [deptHQ, setDeptHQ] = useState("dept1");
+
+  const handleSelectDeptAZ = (value) => {
+    console.log(value)
+    setDeptAZ(value);
+    // code
+  };
+
+  const handleSelectDeptHQ = (value) => {
+    console.log(value)
+    setDeptHQ(value);
+    // code
+  };
 
   return (
     <Container maxWidth="xl">
@@ -61,17 +77,18 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title={t("app.ErrorLogs")}
+            title={t("app.Contraband")}
             total={5}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/alert.png" />}
           />
         </Grid>
 
+        {/* 出勤概覽 + 員工數量 ============================================================================ */}
         <Grid xs={12} md={6} lg={8}>
           <AppWebsiteVisits
             title={t("app.AttendanceOverview")}
-            subheader={`${t(`app.Subtitle`)  }${rate}%`}
+            subheader={`${t(`app.Subtitle`)} ${rate}%`}
             chart={{
               labels: [
                 '01/01/2003',
@@ -88,42 +105,35 @@ export default function AppView() {
               ],
               series: [
                 {
-                  name: t("app.Attendance"),
+                  name: t("app.OnTime"),
                   type: 'line',
                   fill: 'solid',
                   data: [35, 32, 36, 47, 45, 52, 64, 52, 59, 49, 39],
                 },
                 {
-                  name: t("app.Overdue"),
+                  name: t("app.Late"),
                   type: 'line',
                   fill: 'solid',
                   data: [30, 21, 14, 29, 22, 43, 21, 41, 15, 27, 43],
                 },
                 {
-                  name: t("app.Absent"),
-                  type: 'column',
+                  name: t("app.Early"),
+                  type: 'line',
                   fill: 'solid',
-                  data: [7, 6, 15, 10, 13, 9, 3, 2, 0, 3, 4],
+                  data: [10, 6, 12, 9, 5, 8, 20, 14, 16, 27, 3],
                 },
+                // {
+                //   name: t("app.Absent"),
+                //   type: 'column',
+                //   fill: 'solid',
+                //   data: [7, 6, 15, 10, 13, 9, 3, 2, 0, 3, 4],
+                // },
               ],
             }}
           />
         </Grid>
 
         <Grid xs={12} md={6} lg={4}>
-          <AppCurrentVisits
-            title={t("app.EmployeeDistribution")}
-            chart={{
-              series: [
-                { label: 'AT', value: 4344 },
-                { label: 'HD', value: 5435 },
-                { label: 'TP', value: 1443 },
-              ],
-            }}
-          />
-        </Grid>
-
-        <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
             title={t("app.EmployeeCount")}
             chart={{
@@ -136,19 +146,117 @@ export default function AppView() {
           />
         </Grid>
 
-        {/* <Grid xs={12} md={6} lg={4}>
-          <AppCurrentSubject
-            title="Current Subject"
+        {/* AZ 和 HQ 的部門 Chart ============================================================================ */}
+        <Grid xs={12} md={6} lg={6}>
+          <AppCurrentVisits
+            title={t("app.AttendanceChartAZ")}
             chart={{
-              categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
               series: [
-                { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
+                { label: 'On Time', value: 90 },
+                { label: 'Early', value: 20 },
+                { label: 'Late', value: 12 },
+              ],
+            }}
+            dept={deptAZ}
+            selectDEPT={handleSelectDeptAZ}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={6}>
+          <AppCurrentVisits
+            title={t("app.AttendanceChartHQ")}
+            chart={{
+              series: [
+                { label: 'On Time', value: 40 },
+                { label: 'Early', value: 10 },
+                { label: 'Late', value: 9 },
+              ],
+            }}
+            dept={deptHQ}
+            selectDEPT={handleSelectDeptHQ}
+          />
+        </Grid>
+
+        {/* 機台的掃描時間曲線圖 + 員工分佈圖 ============================================================================ */}
+        <Grid xs={12} md={6} lg={8}>
+          <AppWebsiteVisits
+            title={t("app.ToolScanTime")}
+            // subheader={`${t(`app.Subtitle`)} ${rate}%`}
+            chart={{
+              labels: [
+                '01/01/2003',
+                '02/01/2003',
+                '03/01/2003',
+                '04/01/2003',
+                '05/01/2003',
+                '06/01/2003',
+                '07/01/2003',
+                '08/01/2003',
+                '09/01/2003',
+                '10/01/2003',
+                '11/01/2003',
+              ],
+              series: [
+                {
+                  name: "AZ",
+                  type: 'line',
+                  fill: 'solid',
+                  data: [35, 32, 36, 47, 45, 52, 64, 52, 59, 49, 39],
+                },
+                {
+                  name: "HQ",
+                  type: 'line',
+                  fill: 'solid',
+                  data: [30, 21, 14, 29, 22, 43, 21, 41, 15, 27, 43],
+                },
+              ],
+            }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={4}>
+          <AppCurrentVisits
+            title={t("app.EmployeeDistribution")}
+            chart={{
+              series: [
+                { label: 'AT', value: 1844 },
+                { label: 'HD', value: 2256 },
+              ],
+            }}
+          />
+        </Grid>
+
+        {/* <Grid xs={12} md={6} lg={6}>
+          <AppCurrentSubject
+            title="Attendance Diagram: AZ"
+            chart={{
+              categories: ["On Time", "Late", "Early", "Contraband"],
+              series: [
+                { name: 'DEPT1', data: [80, 50, 30, 1] },
+                { name: 'DEPT2', data: [50, 30, 20, 2] },
+                { name: 'DEPT3', data: [43, 6, 0, 2] },
+                { name: 'DEPT4', data: [80, 10, 10, 3] },
+              ],
+            }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={6}>
+          <AppCurrentSubject
+            title="Attendance Diagram: HQ"
+            chart={{
+              categories: ["On Time", "Late", "Early", "Contraband"],
+              series: [
+                { name: 'DEPT1', data: [50, 30, 20, 2] },
+                { name: 'DEPT2', data: [80, 10, 10, 3] },
+                { name: 'DEPT3', data: [80, 50, 30, 1] },
+                { name: 'DEPT4', data: [43, 6, 0, 2] },
               ],
             }}
           />
         </Grid> */}
+
+
 
         {/* <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
@@ -209,7 +317,7 @@ export default function AppView() {
           />
         </Grid> */}
 
-        <Grid xs={12} md={6} lg={4}>
+        {/* <Grid xs={12} md={6} lg={4}>
           <AppTasks
             title={t("app.Tasks")}
             list={[
@@ -219,7 +327,7 @@ export default function AppView() {
               { id: '4', name: 'Scoping & Estimations' }
             ]}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

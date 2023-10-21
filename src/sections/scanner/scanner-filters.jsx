@@ -13,6 +13,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { useTranslation } from 'react-i18next';
+
 
 // ----------------------------------------------------------------------
 
@@ -37,10 +39,11 @@ export const DANGER_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function ScannerFilters({ openFilter, onOpenFilter, onCloseFilter }) {
+  const {t} = useTranslation();
 
   const renderZoom = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Zoom</Typography>
+      <Typography variant="subtitle2">Zone</Typography>
       <FormGroup>
         {ZOOM_OPTIONS.map((item) => (
           <FormControlLabel key={item} control={<Checkbox />} label={item} />
@@ -79,7 +82,7 @@ export default function ScannerFilters({ openFilter, onOpenFilter, onCloseFilter
         endIcon={<Iconify icon="ic:round-filter-list" />}
         onClick={onOpenFilter}
       >
-        Filters&nbsp;
+        {t("scanner.Filters")}&nbsp;
       </Button>
 
       <Drawer
@@ -97,7 +100,7 @@ export default function ScannerFilters({ openFilter, onOpenFilter, onCloseFilter
           sx={{ px: 1, py: 2 }}
         >
           <Typography variant="h6" sx={{ ml: 1 }}>
-            Filters
+            {t("scanner.Filters")}
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" />

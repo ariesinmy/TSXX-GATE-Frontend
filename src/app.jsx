@@ -12,7 +12,6 @@ import ThemeProvider from 'src/theme';
 export default function App() {
   useScrollToTop();
   const [themeMode, setThemeMode] = useState("light");
-  console.log(themeMode)
 
   return (
       <ThemeProvider themeMode={themeMode}>

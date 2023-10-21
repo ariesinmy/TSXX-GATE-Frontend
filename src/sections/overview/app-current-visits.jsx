@@ -8,6 +8,12 @@ import { fNumber } from 'src/utils/format-number';
 
 import Chart, { useChart } from 'src/components/chart';
 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 400;
@@ -28,7 +34,8 @@ const StyledChart = styled(Chart)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function AppCurrentVisits({ title, subheader, chart, ...other }) {
+export default function AppCurrentVisits({ title, subheader, chart, dept, selectDEPT, ...other }) {
+  console.log(dept)
   const theme = useTheme();
 
   const { colors, series, options } = chart;
@@ -80,7 +87,29 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
 
   return (
     <Card {...other}>
-      <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
+      <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        <Box><CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} /></Box>
+        {
+          dept
+          ? 
+            <Box>
+              <FormControl sx={{ width: 100, p: 0 }}>
+                <Select
+                  labelId="demo-multiple-name-label"
+                  value={dept}
+                  onChange={(event) => selectDEPT(event.target.value)}
+                  sx={{fontSize: "0.8rem"}}
+                >
+                  <MenuItem value="dept1">DEPT1</MenuItem>
+                  <MenuItem value="dept2">DEPT2</MenuItem>
+                  <MenuItem value="dept3">DEPT3</MenuItem>
+                  <MenuItem value="dept4">DEPT4</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            : null
+        }
+      </Box>
 
       <StyledChart
         dir="ltr"
@@ -98,4 +127,6 @@ AppCurrentVisits.propTypes = {
   chart: PropTypes.object,
   subheader: PropTypes.string,
   title: PropTypes.string,
+  dept: PropTypes.string,
+  selectDEPT: PropTypes.func,
 };

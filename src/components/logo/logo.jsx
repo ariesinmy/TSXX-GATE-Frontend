@@ -5,16 +5,24 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
 import { RouterLink } from 'src/routes/components';
+import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const logo = (
     <Box component="span" sx={{ width: "auto", height: 40, cursor: 'pointer', ...sx, fontSize: "1.5rem"}}>
-      <strong style={{color: "black"}}>
-        TSXX
-        <span style={{color: "#FF3333"}}>GATE</span>
-      </strong>
+      <Typography
+        variant="h4"
+        sx={{
+          color: (theme) => theme.palette.text.primary
+        }}
+      >
+        <strong>
+          <span>TSXX</span>
+          <span style={{color: "#FF3333"}}>GATE</span>
+        </strong>
+      </Typography>
     </Box>
   );
 
