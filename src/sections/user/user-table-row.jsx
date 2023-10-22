@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 export default function UserTableRow({
   avatarUrl,
   employeeId,
-  zoom,
+  zone,
   department,
   shiftTime,
   status,
@@ -65,7 +65,7 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{zoom}</TableCell>
+        <TableCell>{zone}</TableCell>
 
         <TableCell>{department}</TableCell>
 
@@ -109,7 +109,7 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
-  zoom: PropTypes.any,
+  zone: PropTypes.any,
   handleClick: PropTypes.func,
   shiftTime: PropTypes.any,
   employeeId: PropTypes.any,

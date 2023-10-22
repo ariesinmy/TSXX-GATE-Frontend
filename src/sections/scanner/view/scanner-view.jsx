@@ -16,7 +16,6 @@ import Divider from '@mui/material/Divider';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
-
 // ----------------------------------------------------------------------
 // scannerItem
 // {
@@ -39,6 +38,18 @@ export default function ScannerView() {
     setIsProcessing(true);
     setSelectedFile(event.target.files[0]);
   };
+
+  function getStatusDescription(status) {
+    if (status === 0) {
+      return "normal";
+    } if (status === 1) {
+      return "warning";
+    } if (status === 2) {
+      return "danger";
+    } 
+    // 可选：如果需要处理其他状态值
+    return "danger"; // 或者其他适当的描述
+  }
 
   useEffect(() => {
     const newImageInference = async () => {
@@ -70,9 +81,8 @@ export default function ScannerView() {
             id: Date.now(), // 使用时间戳作为唯一 ID
             name: fileName,
             cover: url,
-            status: "danger",
+            status: getStatusDescription(resultsHeaderValue?.status ?? 0)
           };
-
           const newLabeledImageList = [...labeledImage]
           newLabeledImageList.push(imageData);
           setLabeledImageImage(newLabeledImageList);

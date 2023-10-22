@@ -71,6 +71,7 @@ export default function UserPage() {
             avatarUrl: `/assets/images/avatars/avatar_${Math.floor(Math.random() * 25) + 1}.jpg`
           }
         ));
+        console.log(updatedObjList)
         setUsers(updatedObjList);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -168,7 +169,7 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'employeeId', label: t("employee.EmployeeId")},
-                  { id: 'zoom', label: t("employee.Zone")},
+                  { id: 'zone', label: t("employee.Zone")},
                   { id: 'department', label: t("employee.Department")},
                   { id: 'shiftTime', label: t("employee.ShiftTime")},
                   { id: 'status', label: t("employee.Status")},
@@ -186,7 +187,7 @@ export default function UserPage() {
                       key={row.id}
                       avatarUrl={row.avatarUrl}
                       employeeId={row.employeeId}
-                      zoom={row.zoom}
+                      zone={row.zone}
                       department={row.department}
                       shiftTime={row.shiftTime}
                       status={row.status}
