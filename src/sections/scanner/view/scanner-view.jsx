@@ -81,7 +81,7 @@ export default function ScannerView() {
             id: Date.now(), // 使用时间戳作为唯一 ID
             name: fileName,
             cover: url,
-            status: getStatusDescription(resultsHeaderValue?.status ?? 0)
+            status: getStatusDescription(resultsHeaderValue?.status ?? 2)
           };
           const newLabeledImageList = [...labeledImage]
           newLabeledImageList.push(imageData);

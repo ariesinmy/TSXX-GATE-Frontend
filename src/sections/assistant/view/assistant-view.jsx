@@ -62,13 +62,17 @@ export default function AssistantView() {
     }
   };
 
+  const handleClearChat = () => {
+    setChatHistory([]);
+  }
+
   return (
     <>
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" marginBottom="0.8rem">
           <Typography variant="h4">{t("assistant.Assistant")}</Typography>
 
-          <Button variant="contained" color="inherit">
+          <Button variant="contained" color="inherit" onClick={() => handleClearChat()}>
             <Typography variant="body1" color="inherit" style={{ marginRight: '.3rem' }}>
               {t("assistant.RefreshChat")}
             </Typography>
