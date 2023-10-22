@@ -32,9 +32,9 @@
     "login": {
         "ForgotPassword": "忘記密碼",
         "Login": "登入",
-        "Account": "賬號",
+        "Account": "帳號",
         "Password": "密碼",
-        "DontHaveAnAccount": "還沒有賬號",
+        "DontHaveAnAccount": "還沒有帳號",
         "ContactMe": "聯絡我",
         "SigninTo": "歡迎進入"
     },
