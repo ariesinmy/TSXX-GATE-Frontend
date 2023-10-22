@@ -48,7 +48,7 @@ function ReportModal({ open, handleClose, setIsLoading, handleNewReportItems }) 
 
     // Function to handle generating the report
     const handleGenerate = async () => {
-        setIsLoading(true);
+        handleClose();
         // Convert the selected date to timestamps
         const startTimeStamp = new Date(startDate).getTime() / 1000; // Convert to seconds
         const endTimeStamp = new Date(endDate).getTime() / 1000; // Convert to seconds
@@ -58,6 +58,9 @@ function ReportModal({ open, handleClose, setIsLoading, handleNewReportItems }) 
         console.log('Report Type:', selectedReportType);
         console.log('Start Timestamp:', startTimeStamp);
         console.log('End Timestamp:', endTimeStamp);
+        if (selectedReportType && startTimeStamp && endTimeStamp) {
+            setIsLoading(true);
+        }
 
         // You can use these values in your Axios request here.
         const data = {

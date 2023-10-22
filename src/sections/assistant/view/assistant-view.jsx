@@ -65,7 +65,7 @@ export default function AssistantView() {
   return (
     <>
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" marginBottom="0.8rem">
           <Typography variant="h4">{t("assistant.Assistant")}</Typography>
 
           <Button variant="contained" color="inherit">
@@ -77,11 +77,11 @@ export default function AssistantView() {
         </Stack>
 
         <Box
-          flex="1" // 讓Box元素充滿可用的垂直空間
+          // flex="1" // 讓Box元素充滿可用的垂直空間
           display="flex"
           flexDirection="column"
           justifyContent="flex-end" // 此行使對話區固定在底部
-          minHeight="60vh" // 或其他您選擇的適當高度
+          minHeight="70vh" // 或其他您選擇的適當高度
           overflowy="auto" // 如果對話區內容多於可視區域，添加垂直滾動條
           marginBottom={3}
         >
