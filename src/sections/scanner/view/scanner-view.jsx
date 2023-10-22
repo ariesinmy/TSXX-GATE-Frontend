@@ -59,6 +59,9 @@ export default function ScannerView() {
       })
         .then((response) => {
           // 处理成功的响应
+          const resultsHeaderValue = response.headers.results;
+          console.log(response.headers)
+          console.log('results值：', resultsHeaderValue);
           console.log('成功：', response.data);
           const blob = new Blob([response.data], { type: 'image/jpeg' });
           const url = URL.createObjectURL(blob);

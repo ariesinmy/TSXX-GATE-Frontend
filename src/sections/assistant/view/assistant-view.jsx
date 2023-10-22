@@ -7,21 +7,19 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import OpenAI from 'openai';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
+const getLanguage = (i18nLang) => {
+  if (i18nLang === "en") return "English";
+  if (i18nLang === "zh") return "繁體中文";
+  return "日語";
+}
 // ----------------------------------------------------------------------
 export default function AssistantView() {
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
   const [answerReturned, setAnswerReturned] = useState(true);
-
-  const openai = useMemo(() => new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true,
-  }), []);
-
 
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([]); // [{text: string, user: boolean}]
@@ -33,22 +31,26 @@ export default function AssistantView() {
 
   useEffect(() => {
     async function fetchGPT() {
-      if (openai && chatHistory && chatHistory.length > 0 && (chatHistory.length % 2 !== 0)) {
+      if (chatHistory && chatHistory.length > 0 && (chatHistory.length % 2 !== 0)) {
         const userContent = chatHistory[chatHistory.length - 1].text;
-        const completions = await openai.chat.completions.create({
-          model: 'gpt-3.5-turbo',
-          messages: [{ role: 'user', content: userContent }],
-          max_tokens: 256,
-        });
-        console.log(completions);
-        const gptResponse = completions.choices[0].message.content;
-        const gptMessage = { text: gptResponse, user: false };
+        const data = {
+          language: getLanguage(i18n.language),
+          message: userContent
+        };
+        const response = await axios({
+          method: 'post',
+          url: `http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/AnalysisServer/chat`,
+          data,
+        })
+        const answer = response.data.message;
+        console.log(answer);
+        const gptMessage = { text: answer, user: false };
         setChatHistory([...chatHistory, gptMessage]);
         setAnswerReturned(true);
       }
     }
     fetchGPT();
-  }, [chatHistory, openai])
+  }, [chatHistory, i18n.language])
 
   const handleUserSubmit = async () => {
     if (userInput) {

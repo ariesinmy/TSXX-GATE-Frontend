@@ -8,6 +8,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Divider from '@mui/material/Divider';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -31,18 +32,56 @@ const dateInputStyle = {
     transition: 'border-color 0.2s'
 }
 
+const getLang = (lang) => {
+    if (lang === "jp") return "日本語";
+    if (lang === "zh") return "繁體中文";
+    return "English";
+}
+
 // eslint-disable-next-line react/prop-types
-function ReportModal({ open, handleClose }) {
-    const { t } = useTranslation();
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+function ReportModal({ open, handleClose, setIsLoading, handleNewReportItems }) {
+    const { t, i18n } = useTranslation();
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const [selectedReportType, setSelectedReportType] = useState(''); // 初始选择为空
 
-    const handleGenerate = () => {
-        // 在这里处理生成报告的逻辑
-        console.log(`Generating report of type: ${selectedReportType}`);
+    // Function to handle generating the report
+    const handleGenerate = async () => {
+        setIsLoading(true);
+        // Convert the selected date to timestamps
+        const startTimeStamp = new Date(startDate).getTime() / 1000; // Convert to seconds
+        const endTimeStamp = new Date(endDate).getTime() / 1000; // Convert to seconds
+
+        // Now you have the selected report type (selectedReportType) and timestamps (startTimeStamp, endTimeStamp).
+        // You can use these values in your Axios request.
+        console.log('Report Type:', selectedReportType);
+        console.log('Start Timestamp:', startTimeStamp);
+        console.log('End Timestamp:', endTimeStamp);
+
+        // You can use these values in your Axios request here.
+        const data = {
+            endTimestamp: endTimeStamp,
+            language: getLang(i18n.language),
+            startTimestamp: startTimeStamp,
+            type: selectedReportType
+          }
+        const response = await axios({
+            method: 'post',
+            url: `http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/AnalysisServer/report`,
+            data
+        })
+        if (response?.data) {
+            const newReportData = response.data; // data.content, data.title
+            handleSaveContent(newReportData)
+        }
+        console.log(response);
     };
+
+    const handleSaveContent = (newReportData) => {
+        setIsLoading(false);
+        handleNewReportItems(newReportData);
+    }
 
     return (
         <Modal
@@ -73,7 +112,7 @@ function ReportModal({ open, handleClose }) {
                             label={t("report.Attendance")}
                         />
                         <FormControlLabel
-                            value="Safety Inspection"
+                            value="machine"
                             control={<Radio color="primary" />}
                             label={t("report.SafetyInspection")}
                         />
@@ -99,8 +138,8 @@ function ReportModal({ open, handleClose }) {
                         style={dateInputStyle}
                     />
                 </Box >
-                <Button variant="contained" onClick={handleGenerate} style={{ width: '100%', marginTop: 20 }}>
-                    Generate
+                <Button variant="contained" onClick={() => handleGenerate()} style={{ width: '100%', marginTop: 20 }}>
+                    {t("report.Generate")}
                 </Button>
             </Box>
         </Modal>

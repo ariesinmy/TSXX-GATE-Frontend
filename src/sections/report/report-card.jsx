@@ -18,12 +18,8 @@ import jsPDF from 'jspdf';
 
 // ----------------------------------------------------------------------
 
-export default function ReportCard({ report, index }) {
-  const { id, title, avatarUrl, createdAt } = report;
-
-  const latestReportLarge = index === 0;
-
-  const latestReport = index === 1 || index === 2;
+export default function ReportCard({ report, handleOpen, handleSetReportId, handleDeleteReportItems }) {
+  const { id, title, content, avatarUrl, createdAt } = report;
 
   const renderAvatar = (
     <Avatar
@@ -31,16 +27,13 @@ export default function ReportCard({ report, index }) {
       sx={{
         width: 32,
         height: 32,
-        ...((latestReportLarge || latestReport) && {
-          zIndex: 9,
-          top: 24,
-          left: 24,
-          width: 40,
-          height: 40,
-        }),
       }}
     />
   );
+
+  const handleOpenContent = () => {
+    handleSetReportId(id)
+  };
 
   const renderTitle = (
     <Link
@@ -53,11 +46,8 @@ export default function ReportCard({ report, index }) {
         WebkitLineClamp: 2,
         display: '-webkit-box',
         WebkitBoxOrient: 'vertical',
-        ...(latestReportLarge && { typography: 'h5', height: 60 }),
-        ...((latestReportLarge || latestReport) && {
-          color: 'common.white',
-        }),
       }}
+      onClick={() => handleOpenContent()}
     >
       {title}
     </Link>
@@ -68,27 +58,47 @@ export default function ReportCard({ report, index }) {
     const userConfirmed = window.confirm("確定要刪除週報嗎?");
     if (userConfirmed) {
       console.log("success")
-        // 執行刪除操作
-        // 可以在這裡添加你的刪除報告的代碼
+      // 執行刪除操作
+      handleDeleteReportItems(id);
     }
   }
 
   const handleSendMailReport = () => {
-    console.log(`share report:${  id}`);
+    console.log(`share report:${id}`);
     const emailSubject = title; // 电子邮件主题
-    const emailBody = 'This is a content of a weekly report email, you can send it to your senior or manager or any department manager, Let every examine the current situation in the company'; // 电子邮件内容
-
+    const emailBody = content;
     const mailtoLink = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
     window.location.href = mailtoLink;
   }
 
-  const handleDirectMailReport = () => {};
+  const handleDirectMailReport = () => { };
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.text('Hello, this is a PDF!', 10, 10);
-    const test = doc.save('sample.pdf');
+
+    const words = content.split(' '); // 将句子分割成单词
+    const lines = [];
+
+    for (let i = 0; i < words.length; i += 10) {
+      const line = words.slice(i, i + 10).join(' '); // 将3个单词组合为一行
+      lines.push(line);
+    }
+
+    // 设置标题
+    doc.setFontSize(17);
+    doc.text(title, 8, 20);
+
+    // 设置正文文本
+    doc.setFontSize(14);
+    let yPosition = 40; // 定义文本的起始 y 坐标位置
+
+    lines.forEach(line => {
+        doc.text(line, 20, yPosition);
+        yPosition += 10; // 每行之间的垂直距离
+    });
+
+    doc.save(`${title}.pdf`);
   };
 
   const getIconHandler = (iconIndex) => {
@@ -111,19 +121,13 @@ export default function ReportCard({ report, index }) {
     >
       {[
         { icon: 'mingcute:delete-fill' },
-        { icon: 'majesticons:mail'},
+        { icon: 'majesticons:mail' },
         { icon: 'eva:share-fill' },
         { icon: 'ph:download-fill' },
       ].map((info, _index) => (
         <Stack
           key={_index}
           direction="row"
-          sx={{
-            ...((latestReportLarge || latestReport) && {
-              opacity: 0.48,
-              color: 'common.white',
-            }),
-          }}
           onClick={getIconHandler(_index)}
         >
           <Iconify width={16} icon={info.icon} sx={{ mr: 0.5, cursor: "pointer" }} />
@@ -138,10 +142,6 @@ export default function ReportCard({ report, index }) {
       component="div"
       sx={{
         color: 'text.disabled',
-        ...((latestReportLarge || latestReport) && {
-          opacity: 0.48,
-          color: 'common.white',
-        }),
       }}
     >
       {fDate(createdAt)}
@@ -149,16 +149,11 @@ export default function ReportCard({ report, index }) {
   );
 
   return (
-    <Grid xs={12} sm={latestReportLarge ? 12 : 6} md={latestReportLarge ? 6 : 3}>
+    <Grid xs={12} sm={6} md={3}>
       <Card>
         <Box
           sx={{
             p: (theme) => theme.spacing(4, 3, 3, 3),
-            ...((latestReportLarge || latestReport) && {
-              width: 1,
-              bottom: 0,
-              position: 'absolute',
-            }),
           }}
         >
           <Box
@@ -184,5 +179,7 @@ export default function ReportCard({ report, index }) {
 
 ReportCard.propTypes = {
   report: PropTypes.object.isRequired,
-  index: PropTypes.number,
+  handleOpen: PropTypes.func,
+  handleSetReportId: PropTypes.func,
+  handleDeleteReportItems: PropTypes.func,
 };

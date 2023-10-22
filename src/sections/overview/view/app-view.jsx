@@ -48,6 +48,9 @@ export default function AppView() {
       try {
         const responsePromises = timestampArray.map(async (timestamp) => {
           const response = await axios.get(apiEndpoint, {
+            headers: {
+              AccessControlAllowOrigin: "*",
+            },
             params: {
               start_timestamp: timestamp,
               end_timestamp: timestamp + 86400,
@@ -126,15 +129,11 @@ export default function AppView() {
     fetchData();
   }, []);
 
-
   const handleSelectDeptAZ = (value) => {
-    console.log(value)
     setDeptAZ(value);
-    // code
   };
 
   const handleSelectDeptHQ = (value) => {
-    console.log(value)
     setDeptHQ(value);
     // code
   };
@@ -143,6 +142,9 @@ export default function AppView() {
     const lastEle = attendanceDataList[attendanceDataList.length - 1];
     return lastEle.theNumberOfEarly + lastEle.theNumberOfOnTime + lastEle.theNumberOfLate
   }
+
+  const getNumberByDeptAZ = () => Math.floor(Math.random() * 50) + 4;
+  const getNumberByDeptHQ = () => Math.floor(Math.random() * 50) + 4;
 
   return (
     <Container maxWidth="xl">
@@ -244,9 +246,9 @@ export default function AppView() {
             title={t("app.AttendanceChartAZ")}
             chart={{
               series: [
-                { label: `${t("app.OnTime")}`, value: 90 },
-                { label: `${t("app.Late")}`, value: 20 },
-                { label: `${t("app.Early")}`, value: 12 },
+                { label: `${t("app.OnTime")}`, value: getNumberByDeptAZ() },
+                { label: `${t("app.Late")}`, value: getNumberByDeptAZ() },
+                { label: `${t("app.Early")}`, value: getNumberByDeptAZ() },
               ],
             }}
             dept={deptAZ}
@@ -259,9 +261,9 @@ export default function AppView() {
             title={t("app.AttendanceChartHQ")}
             chart={{
               series: [
-                { label: `${t("app.OnTime")}`, value: 40 },
-                { label: `${t("app.Late")}`, value: 10 },
-                { label: `${t("app.Early")}`, value: 9 },
+                { label: `${t("app.OnTime")}`, value: getNumberByDeptHQ() },
+                { label: `${t("app.Late")}`, value: getNumberByDeptHQ() },
+                { label: `${t("app.Early")}`, value: getNumberByDeptHQ() },
               ],
             }}
             dept={deptHQ}

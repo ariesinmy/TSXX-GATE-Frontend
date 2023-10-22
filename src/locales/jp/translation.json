@@ -2,20 +2,25 @@
     "app": {
         "Absent": "不在",
         "Attendance": "出席",
-        "AttendanceCount": "出席者数",
+        "AttendanceCount": "出席",
         "AttendanceOverview": "出席概要",
         "EmployeeCount": "従業員数",
         "EmployeeDistribution": "従業員分布",
-        "ErrorLogs": "エラーログ",
-        "LateArrivals": "遅刻者数",
+        "Contraband": "禁制品",
+        "LateArrivals": "遅刻",
         "MachineStatus": "機械の状態",
-        "Overdue": "遅刻",
+        "Late": "遅刻",
         "Tasks": "タスク",
         "Welcome": "こんにちは、お帰りなさい",
-        "Subtitle": "今日の出席率は"
+        "Subtitle": "今日の出席率は",
+        "Early": "早い",
+        "ToolScanTime": "ツールスキャン時間",
+        "OnTime": "時間通り",
+        "AttendanceChartAZ": "出席チャート：AZ",
+        "AttendanceChartHQ": "出席チャート：HQ"
     },
     "machine": {
-        "Good": "正常",
+        "Good": "良い",
         "NeedsRepair": "修理が必要"
     },
     "country": {
@@ -24,38 +29,67 @@
         "Japan": "日本"
     },
     "login": {
-        "ForgotPassword": "パスワードを忘れました",
+        "ForgotPassword": "パスワードを忘れた",
         "Login": "ログイン",
         "Account": "アカウント",
         "Password": "パスワード",
-        "DontHaveAnAccount": "アカウントをお持ちでない場合",
-        "ContactMe": "お問い合わせ",
+        "DontHaveAnAccount": "アカウントを持っていない",
+        "ContactMe": "連絡してください",
         "SigninTo": "サインイン"
     },
     "employee": {
         "Employees": "従業員",
         "EmployeeId": "従業員ID",
-        "Zone": "エリア",
+        "Zone": "ゾーン",
         "Department": "部門",
         "ShiftTime": "シフト時間",
         "Status": "ステータス",
-        "NewEmployee": "新しい従業員を作成"
+        "NewEmployee": "新しい従業員",
+        "early": "早い",
+        "late": "遅い",
+        "on-time": "時間通り"
     },
     "scanner": {
         "Scanner": "スキャナー",
         "UploadNewImage": "新しい画像をアップロード",
-        "Filters": "フィルター",
-        "SortBy": "並び替え"
+        "Filters": "フィルタ",
+        "SortBy": "並べ替え",
+        "Dangerous": "危険",
+        "Safety": "安全",
+        "Oldest": "最古",
+        "Newest": "最新",
+        "dangerous": "危険",
+        "safety": "安全",
+        "oldest": "最古",
+        "newest": "最新"
+    },
+    "assistant": {
+        "Assistant": "アシスタント",
+        "RefreshChat": "チャットを更新",
+        "Content1": "こんにちは、私はチャットアシスタントです",
+        "Content2": "会話を始めましょう",
+        "SendYourMessage": "メッセージを送信",
+        "Send": "送信",
+        "Wait": "待つ"
     },
     "report": {
-        "Report": "週報",
-        "NewReport": "新しい週報を作成"
+        "Report": "レポート",
+        "NewReport": "新しいレポート",
+        "CreateReport": "新しいレポートを作成",
+        "ReportType": "レポートタイプ",
+        "StartDate": "開始日",
+        "EndDate": "終了日",
+        "Attendance": "出席",
+        "SafetyInspection": "安全点検",
+        "SearchReport": "レポートを検索",
+        "Wait": "待つ",
+        "Generate": "生成"
     },
     "navItem": {
         "Dashboard": "ダッシュボード",
         "Employee": "従業員",
         "Scanner": "スキャナー",
         "Assistant": "アシスタント",
-        "Report": "週報"
+        "Report": "レポート"
     }
 }

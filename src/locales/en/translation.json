@@ -69,7 +69,9 @@
         "Content1": "Hi, I'm Chat Assistant",
         "Content2": "Start our conversation",
         "SendYourMessage": "Send your message",
-        "Send": "Send"
+        "Send": "Send",
+        "Wait": "Wait"
+
     },
     "report": {
         "Report": "Report",
@@ -81,7 +83,8 @@
         "Attendance": "Attendance",
         "SafetyInspection": "Safety Inspection",
         "SearchReport": "Search report",
-        "Wait": "Wait" 
+        "Wait": "Wait",
+        "Generate": "Generate"
     },
     "navItem": {
         "Dashboard": "Dashboard",
